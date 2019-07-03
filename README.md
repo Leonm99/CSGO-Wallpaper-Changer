@@ -42,6 +42,18 @@ To change the background we simply have to create or download a webm file that w
 
 ---
 
+# FAQ  
+  
+#### Can i get VAC-Banned for this?
+No you cant! The program does not interfere with valve/steam/CS:GO in any way.  
+You can find serveral tutorials on how to change the background and that it's safe on YouTube.  
+This tool just makes things way easier😃  
+  
+#### Is this tool save to use?
+Yes it is! you can even check the source code thats lit🔥
+
+---
+
 GNU
 
 
