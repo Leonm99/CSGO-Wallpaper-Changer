@@ -202,7 +202,7 @@ namespace CSGO_Wallpaper
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(173, 38);
             this.button6.TabIndex = 10;
-            this.button6.Text = "Change wallpaper random on CS:GO start";
+            this.button6.Text = "Create Shortcut";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.Button6_Click);
             // 
