@@ -47,5 +47,10 @@ namespace CSGO_Wallpaper
                 MessageBox.Show("Unable to open link that was clicked.");
             }
         }
+
+        private void LabelProductName_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

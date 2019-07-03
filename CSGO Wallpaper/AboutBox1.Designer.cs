@@ -76,8 +76,9 @@ namespace CSGO_Wallpaper
             this.labelProductName.Name = "labelProductName";
             this.labelProductName.Size = new System.Drawing.Size(417, 50);
             this.labelProductName.TabIndex = 1;
-            this.labelProductName.Text = "CS:GO Wallpaper Changer\r\nVersion 2.0";
+            this.labelProductName.Text = "CS:GO Wallpaper Changer\r\nVersion 1.0";
             this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelProductName.Click += new System.EventHandler(this.LabelProductName_Click);
             // 
             // tableLayoutPanel
             // 

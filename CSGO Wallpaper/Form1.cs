@@ -12,7 +12,7 @@
 
     public partial class Form1 : Form
     {
-        public string currentVersion = @"1.1.5";
+        public string currentVersion = @"1.1";
 
         public int wallpaperAmount;
 
@@ -315,7 +315,8 @@
                         }
                         else
                         {
-                            AddText(richTextBox1, "Steam Install Path was not found, please choose Steam path!", Color.Red);
+                            MessageBox.Show("Steam Install Path was not found, please choose Steam path!");
+
 
                             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
                             dialog.InitialDirectory = "C:\\Users";
@@ -433,18 +434,37 @@
 
         public void SetWallpaper()
         {
-            try
-            {
-                //Replace active wallpaper with new wallpaper
-                System.IO.File.Copy(selectedWallpaper + "\\sirocco.webm", panoramaWallpaperPath + "\\sirocco.webm", true);
-                System.IO.File.Copy(selectedWallpaper + "\\sirocco540.webm", panoramaWallpaperPath + "\\sirocco540.webm", true);
-                System.IO.File.Copy(selectedWallpaper + "\\sirocco720.webm", panoramaWallpaperPath + "\\sirocco720.webm", true);
 
-            }
-            catch
+            string sirocco1 = selectedWallpaper + "\\sirocco.webm";
+            string sirocco2 = selectedWallpaper + "\\sirocco540.webm";
+            string sirocco3 = selectedWallpaper + "\\sirocco720.webm";
+
+            //Replace active wallpaper with new wallpaper
+            if (System.IO.File.Exists(sirocco1))
             {
-                AddText(richTextBox1, "Could not copy files into destination folder!", Color.Red);
+                System.IO.File.Copy(sirocco1, panoramaWallpaperPath + "\\sirocco.webm", true);
+                AddText(richTextBox1, "Copy files...", Color.White);
+
+                if (System.IO.File.Exists(sirocco2))
+                {
+                    System.IO.File.Copy(sirocco2, panoramaWallpaperPath + "\\sirocco540.webm", true);
+                }
+
+                if (System.IO.File.Exists(sirocco3))
+                {
+                    System.IO.File.Copy(sirocco3, panoramaWallpaperPath + "\\sirocco720.webm", true);
+                }
             }
+            else
+            {
+                AddText(richTextBox1, "No sirocco.webm file found!", Color.Red);
+            }
+
+
+
+
+
+
 
             //Update activeWallpaper here and in save file
             activeWallpaper = selectedWallpaper;
@@ -604,6 +624,18 @@
         {
             Form2 howto = new Form2();
             howto.Show();
+        }
+
+        private void GitHubToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to open link that was clicked.");
+            }
         }
     }
 }
