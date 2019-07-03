@@ -425,12 +425,6 @@
 
         //============================================================================================================-UI-Elements-==========================================================================================================
 
-        private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
-        {// shows about section
-            AboutBox1 about = new AboutBox1();
-            about.Show();
-        }
-
         private void Button1_Click(object sender, EventArgs e)
         {
             //prompts the user to change path for Wallpapers
@@ -535,6 +529,10 @@
             Start();
         }
 
+        private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {// shows about section
+        }
+
         private void GitHubToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //show my github page cause im fucking awesome
@@ -550,14 +548,21 @@
 
         private void HelpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //much emptiness is present here but thats not your buisiness
+            AboutBox1 about = new AboutBox1();
+            about.Show();
         }
 
         private void HowToToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //shows a little howto
-            Form2 howto = new Form2();
-            howto.Show();
+            //opens howto
+            try
+            {
+                System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer/wiki/How-to-use...");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to open link that was clicked.");
+            }
         }
 
         private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
