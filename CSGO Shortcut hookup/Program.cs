@@ -15,13 +15,8 @@
         /// <param name="args">The args<see cref="string[]"/></param>
         internal static void Main(string[] args)
         {
-
-
-
-
-            string currentVersion = @"1.1.5";
-            string saveFileVersion = @"1.1.5";
-
+            string currentVersion = @"1.0";
+            string saveFileVersion = @"1.0";
 
             int wallpaperAmount;
 
@@ -43,8 +38,6 @@
 
             string[] wallpapers;
 
-
-
             using (StreamReader sr = File.OpenText(saveFile))
             {
                 saveFileVersion = sr.ReadLine();
@@ -55,12 +48,9 @@
                 panoramaWallpaperStoragePath = sr.ReadLine();
                 activeWallpaper = sr.ReadLine();
                 revealChosenWallpaper = bool.Parse(sr.ReadLine());
-
             }
 
             wallpapers = Directory.GetDirectories(panoramaWallpaperStoragePath);
-
-
 
             if (wallpapers != null)
             {
@@ -72,22 +62,17 @@
 
                     selectedWallpaper = wallpapers[i];
 
-
                     if (File.Exists(selectedWallpaper + "\\sirocco.webm"))
                     {
-
                         SetWallpaper();
                         break;
                     }
                     else
                     {
-
-
                         break;
                     }
                 }
             }
-
 
             void SetWallpaper()
             {
@@ -112,14 +97,11 @@
                         sw.WriteLine(activeWallpaper);
                         sw.WriteLine(revealChosenWallpaper);
                     }
-
                 }
                 catch
                 {
-
                 }
             }
-
 
             ProcessStartInfo startInfo = new ProcessStartInfo(steamInstallPath + "\\Steam.exe");
             startInfo.Arguments = "-applaunch 730";

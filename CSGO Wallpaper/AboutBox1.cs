@@ -10,17 +10,18 @@ namespace CSGO_Wallpaper
             InitializeComponent();
             linkLabel1.LinkArea = new LinkArea(13, 66);
             linkLabel2.LinkArea = new LinkArea(62, 89);
-
         }
 
         private void Label1_Click(object sender, System.EventArgs e)
         {
-
         }
 
         private void Label2_Click(object sender, System.EventArgs e)
         {
+        }
 
+        private void LabelProductName_Click(object sender, EventArgs e)
+        {
         }
 
         private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -33,7 +34,6 @@ namespace CSGO_Wallpaper
             {
                 MessageBox.Show("Unable to open link that was clicked.");
             }
-
         }
 
         private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -46,11 +46,6 @@ namespace CSGO_Wallpaper
             {
                 MessageBox.Show("Unable to open link that was clicked.");
             }
-        }
-
-        private void LabelProductName_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
