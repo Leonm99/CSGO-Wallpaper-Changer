@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSGO Wallpaper", "CSGO Wallpaper\CSGO Wallpaper.csproj", "{6741684C-31AC-4ADE-8485-7CF5DE7F554C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSGO Shortcut hookup", "CSGO Shortcut hookup\CSGO Shortcut hookup.csproj", "{CA2AB592-04BE-4CA0-ADE2-0EA836C51450}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6741684C-31AC-4ADE-8485-7CF5DE7F554C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6741684C-31AC-4ADE-8485-7CF5DE7F554C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6741684C-31AC-4ADE-8485-7CF5DE7F554C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6741684C-31AC-4ADE-8485-7CF5DE7F554C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA2AB592-04BE-4CA0-ADE2-0EA836C51450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA2AB592-04BE-4CA0-ADE2-0EA836C51450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA2AB592-04BE-4CA0-ADE2-0EA836C51450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA2AB592-04BE-4CA0-ADE2-0EA836C51450}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ABC4FE79-A4CB-42A4-AF87-5BEF3FB5BBE8}
+	EndGlobalSection
+EndGlobal
