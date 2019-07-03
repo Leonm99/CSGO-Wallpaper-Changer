@@ -1,8 +1,7 @@
 # CS:GO Wallpaper Changer
-
-
 CS:GO Wallpaper Changer is a small and easy tool to replace the background in the CS:GO main menu. (Panorama)
-
+![alt text](https://i.postimg.cc/15zCL5mq/CSGO-WPC.jpg "CS:GO Wallpaper Changer")  
+  
 --- 
 # Features
   - [x] Choose the wallpaper you want.
@@ -14,6 +13,7 @@ CS:GO Wallpaper Changer is a small and easy tool to replace the background in th
 
   - [ ] Bind a hotkey for changing the wallpaper in-game.
   - [ ] Change wallpaper every X-minutes.
+  - [ ] Implement an option to select video file name in case of CS:GO using another video file than sirocco
 
 --- 
 
@@ -33,9 +33,25 @@ sirocco540.webm
 sirocco720.webm
 ```
 For the changes to take place we only need to replace the first file without numbers. (sirocco.webm)
-To change the background we simply have to create or download a webm file that we like and replace it with the currently active one, in this case **sirocco.webm**
+To change the background we simply have to create or download a webm file that we like and replace it with the currently active one, in this case **sirocco.webm** 
+  
+![alt text](https://i.postimg.cc/mr78QPw0/Original-Wallpaper-Location.jpg "CS:GO Wallpaper Changer")  
+### [How to use CS:GO Wallpaper Changer](https://github.com/Leonm99/CSGO-Wallpaper-Changer/wiki/How-to-use... "How To")  
+### [mruy’s CS:GO Wallpapers](https://www.mruy.de/csgo-panorama-backgrounds/ "CS:GO Wallpapers")  
+### [Convert any Video/Picture into Webm](https://video.online-convert.com/convert-to-webm "Webm Converter")  
 
-### [How to use CS:GO Wallpaper Changer](https://github.com/Leonm99/CSGO-Wallpaper-Changer/wiki/How-to-use... "How To")
+
+---
+
+# FAQ  
+  
+#### Can i get VAC-Banned for this?
+No you cant! The program does not interfere with valve/steam/CS:GO in any way.  
+You can find serveral tutorials on how to change the background and that it's safe on YouTube.  
+This tool just makes things way easier😃  
+  
+#### Is this tool save to use?
+Yes it is! you can even check the source code thats lit🔥
 
 ---
 
