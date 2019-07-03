@@ -18,7 +18,6 @@
         public string currentVersion = @"1.0"; //Version.
         public string panoramaWallpaperPath; //Original wallpaper Path.
         public string panoramaWallpaperStoragePath = "Folder not selected..."; //Saved wallpaper path.
-        public bool revealChosenWallpaper = true; //Show selected wallpaper in log.
         public string saveFile = "C:\\ProgramData\\Panorama Wallpaper Changer\\saveddata.txt"; //Savefile path.
         public string selectedWallpaper; //Path of selected wallpaper.
         public string steamInstallPath; //Steams installation path.
@@ -276,7 +275,6 @@
                 panoramaWallpaperPath = sr.ReadLine();
                 panoramaWallpaperStoragePath = sr.ReadLine();
                 activeWallpaper = sr.ReadLine();
-                revealChosenWallpaper = bool.Parse(sr.ReadLine());
             }
         }
 
@@ -292,7 +290,6 @@
                 sw.WriteLine(panoramaWallpaperPath);
                 sw.WriteLine(panoramaWallpaperStoragePath);
                 sw.WriteLine(activeWallpaper);
-                sw.WriteLine(revealChosenWallpaper);
             }
         }
 
@@ -355,10 +352,7 @@
             activeWallpaper = selectedWallpaper;
             WriteData();
 
-            if (revealChosenWallpaper)
-            {
                 AddText(richTextBox1, "Wallpaper set to " + activeWallpaper.Remove(0, panoramaWallpaperStoragePath.Length + 1), Color.Gold);
-            }
         }
 
         public void RunCS()

@@ -4,15 +4,8 @@
     using System.Diagnostics;
     using System.IO;
 
-    /// <summary>
-    /// Defines the <see cref="Program" />
-    /// </summary>
     internal class Program
     {
-        /// <summary>
-        /// The Main
-        /// </summary>
-        /// <param name="args">The args<see cref="string[]"/></param>
         internal static void Main(string[] args)
         {
             string currentVersion = @"1.0";
@@ -30,8 +23,6 @@
 
             string activeWallpaper = @"no wallpaper";//Wallpaper that will be replaced by selected wallpaper
 
-            bool revealChosenWallpaper = true;
-
             string selectedWallpaper;//Wallpaper that will replace active wallpaper
 
             string saveFile = "C:\\ProgramData\\Panorama Wallpaper Changer\\saveddata.txt";
@@ -47,7 +38,6 @@
                 panoramaWallpaperPath = sr.ReadLine();
                 panoramaWallpaperStoragePath = sr.ReadLine();
                 activeWallpaper = sr.ReadLine();
-                revealChosenWallpaper = bool.Parse(sr.ReadLine());
             }
 
             wallpapers = Directory.GetDirectories(panoramaWallpaperStoragePath);
@@ -74,38 +64,46 @@
                 }
             }
 
-            void SetWallpaper()
-            {
-                try
-                {
-                    //Replace active wallpaper with new wallpaper
-                    File.Copy(selectedWallpaper + "\\sirocco.webm", panoramaWallpaperPath + "\\sirocco.webm", true);
-                    File.Copy(selectedWallpaper + activeWallpaper + "\\sirocco540.webm", panoramaWallpaperPath + "\\sirocco540.webm", true);
-                    File.Copy(selectedWallpaper + activeWallpaper + "\\sirocco720.webm", panoramaWallpaperPath + "\\sirocco720.webm", true);
-
-                    //Update activeWallpaper here and in save file
-                    activeWallpaper = selectedWallpaper;
-
-                    using (StreamWriter sw = File.CreateText(saveFile))
-                    {
-                        sw.WriteLine(currentVersion);
-                        sw.WriteLine(wallpaperAmount);
-                        sw.WriteLine(steamInstallPath);
-                        sw.WriteLine(csgoInstallPath);
-                        sw.WriteLine(panoramaWallpaperPath);
-                        sw.WriteLine(panoramaWallpaperStoragePath);
-                        sw.WriteLine(activeWallpaper);
-                        sw.WriteLine(revealChosenWallpaper);
-                    }
-                }
-                catch
-                {
-                }
-            }
-
             ProcessStartInfo startInfo = new ProcessStartInfo(steamInstallPath + "\\Steam.exe");
             startInfo.Arguments = "-applaunch 730";
             Process.Start(startInfo);
+
+            void SetWallpaper()
+            {
+                string sirocco1 = selectedWallpaper + "\\sirocco.webm";
+                string sirocco2 = selectedWallpaper + "\\sirocco540.webm";
+                string sirocco3 = selectedWallpaper + "\\sirocco720.webm";
+
+                //Replace active wallpaper with new wallpaper
+                if (System.IO.File.Exists(sirocco1))
+                {
+                    //check if the needed file is there.
+                    System.IO.File.Copy(sirocco1, panoramaWallpaperPath + "\\sirocco.webm", true);
+
+                    if (System.IO.File.Exists(sirocco2))
+                    {
+                        System.IO.File.Copy(sirocco2, panoramaWallpaperPath + "\\sirocco540.webm", true);
+                    }
+
+                    if (System.IO.File.Exists(sirocco3))
+                    {
+                        System.IO.File.Copy(sirocco3, panoramaWallpaperPath + "\\sirocco720.webm", true);
+                    }
+                }
+
+                //Update activeWallpaper here and in save file
+                activeWallpaper = selectedWallpaper;
+                using (StreamWriter sw = System.IO.File.CreateText(saveFile))
+                {
+                    sw.WriteLine(currentVersion);
+                    sw.WriteLine(wallpaperAmount);
+                    sw.WriteLine(steamInstallPath);
+                    sw.WriteLine(csgoInstallPath);
+                    sw.WriteLine(panoramaWallpaperPath);
+                    sw.WriteLine(panoramaWallpaperStoragePath);
+                    sw.WriteLine(activeWallpaper);
+                }
+            }
         }
     }
 }
