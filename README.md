@@ -13,6 +13,7 @@ CS:GO Wallpaper Changer is a small and easy tool to replace the background in th
 
   - [ ] Bind a hotkey for changing the wallpaper in-game.
   - [ ] Change wallpaper every X-minutes.
+  - [ ] Implement an option to select video file name in case of CS:GO using another video file than sirocco
 
 --- 
 
