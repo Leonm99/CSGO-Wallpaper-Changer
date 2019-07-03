@@ -3,6 +3,7 @@
 
 CS:GO Wallpaper Changer is a small and easy tool to replace the background in the CS:GO main menu. (Panorama)
 
+--- 
 # Features
   - [x] Choose the wallpaper you want.
   - [x] Randomly choose a wallpaper.
@@ -35,6 +36,8 @@ For the changes to take place we only need to replace the first file without num
 To change the background we simply have to create or download a webm file that we like and replace it with the currently active one, in this case **sirocco.webm**
 
 [How to use CS:GO Wallpaper Changer](https://github.com/Leonm99/CSGO-Wallpaper-Changer/wiki/How-to-use... "How To")
+
+---
 
 GNU
 
