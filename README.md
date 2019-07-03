@@ -35,7 +35,7 @@ sirocco720.webm
 For the changes to take place we only need to replace the first file without numbers. (sirocco.webm)
 To change the background we simply have to create or download a webm file that we like and replace it with the currently active one, in this case **sirocco.webm**
 
-[How to use CS:GO Wallpaper Changer](https://github.com/Leonm99/CSGO-Wallpaper-Changer/wiki/How-to-use... "How To")
+### [How to use CS:GO Wallpaper Changer](https://github.com/Leonm99/CSGO-Wallpaper-Changer/wiki/How-to-use... "How To")
 
 ---
 
