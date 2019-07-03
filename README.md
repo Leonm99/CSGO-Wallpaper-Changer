@@ -11,8 +11,8 @@ CS:GO Wallpaper Changer is a small and easy tool to replace the background in th
 
 # Coming Features!
 
-  - [] Bind a hotkey for changing the wallpaper in-game.
-  - [] Change wallpaper every X-minutes.
+  - [ ] Bind a hotkey for changing the wallpaper in-game.
+  - [ ] Change wallpaper every X-minutes.
 
 --- 
 
