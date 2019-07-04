@@ -16,7 +16,7 @@ CS:GO Wallpaper Changer is a small and easy tool to replace the background in th
   - [ ] Implement an option to select video file name in case of CS:GO using another video file than sirocco
   - [ ] Material redesign.
   - [ ] convert pictures&videos directly in the program.
-  - [ ] Accept pure Files as wallpaper without extra folders.
+  - [ ] Accept Pictures and videos as wallpaper without extra folders.
 
 --- 
 
