@@ -29,12 +29,11 @@
         internal Color darkbluegray = Color.FromArgb(38, 50, 56);
         internal string desktopPath; //Path to users desktop.
         internal Color lightbluegray = Color.FromArgb(96, 125, 139);
+        internal Color lightgreen = Color.FromArgb(102, 187, 106);
         internal Color lightred = Color.FromArgb(255, 82, 82);
         internal string saveFileVersion; //Version of the savefile.
         internal string[] steamLibraries = new string[32]; //Active Steam Librarys.
         internal string thisdir; //Path from this program.
-
-        internal Color lightgreen = Color.FromArgb(102, 187, 106);
         //============================================================================================================-Variables-==========================================================================================================
 
         //============================================================================================================-Important-Stuff-==========================================================================================================
@@ -418,6 +417,11 @@
 
         //============================================================================================================-UI-Elements-==========================================================================================================
 
+        private void Button4_Click_1(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // this one is the start of everything bro.. like the big bang or some shit
@@ -425,6 +429,7 @@
             desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             thisdir = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
             materialSingleLineTextField1.Text = "" + panoramaWallpaperStoragePath;
+            materialSingleLineTextField2.Text = "" + csgoInstallPath;
             materialSingleLineTextField1.SelectAll();
             materialSingleLineTextField1.Focus();
             richTextBox1.BackColor = Color.FromArgb(55, 71, 79);
@@ -434,14 +439,44 @@
             Start();
         }
 
-        private void RichTextBox1_TextChanged(object sender, EventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //much emptiness is present here but thats not your buisiness
+            //launches explorer in the wallpaper path
+            if (Directory.Exists(panoramaWallpaperStoragePath))
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    Arguments = panoramaWallpaperStoragePath,
+                    FileName = "explorer.exe"
+                };
+
+                Process.Start(startInfo);
+            }
         }
 
-        private void Button4_Click_1(object sender, EventArgs e)
+        private void LinkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            richTextBox1.Clear();
+            try
+            {
+                System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to open link that was clicked.");
+            }
+        }
+
+        private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //opens howto
+            try
+            {
+                System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer/wiki/How-to-use...");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to open link that was clicked.");
+            }
         }
 
         private void MaterialFlatButton1_Click_1(object sender, EventArgs e)
@@ -450,6 +485,7 @@
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
             dialog.InitialDirectory = thisdir;
             dialog.IsFolderPicker = true;
+            dialog.Multiselect = false;
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 materialSingleLineTextField1.Text = "" + dialog.FileName;
@@ -473,18 +509,37 @@
             }
         }
 
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void MaterialFlatButton2_Click(object sender, EventArgs e)
         {
-            //launches explorer in the wallpaper path
-            if (Directory.Exists(panoramaWallpaperStoragePath))
-            {
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    Arguments = panoramaWallpaperStoragePath,
-                    FileName = "explorer.exe"
-                };
+            //prompts the user to change path for Wallpapers
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = @"c:\";
+            dialog.IsFolderPicker = true;
+            dialog.Multiselect = false;
+            dialog.Title = "Choose your Counter-Strike Global Offensive folder";
 
-                Process.Start(startInfo);
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                if (Directory.Exists(dialog.FileName + "\\csgo\\panorama\\videos\\"))
+                {
+                    materialSingleLineTextField2.Text = "" + dialog.FileName;
+                    csgoInstallPath = dialog.FileName;
+                    panoramaWallpaperPath = csgoInstallPath + "\\csgo\\panorama\\videos\\";
+
+                    WriteData();
+                    AddText(richTextBox1, "Changed CS:GO path" + " " + csgoInstallPath, lightbluegray);
+                }
+                else
+                {
+                    MessageBox.Show("The folder you have choosen is not the Counter-Strike Global Offensive folder!" +
+                                        "\n \n If you have installed CS:GO in the standard path it should be in:\n" +
+                                        @"C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\n" +
+                                        "If you have installed CS:GO in another directory please select it.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select the Counter-Strike Global Offensive folder!");
             }
         }
 
@@ -548,31 +603,11 @@
             RunCS();
         }
 
-        private void LinkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        private void RichTextBox1_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Unable to open link that was clicked.");
-            }
+            //much emptiness is present here but thats not your buisiness
         }
-
-        private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            //opens howto
-            try
-            {
-                System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer/wiki/How-to-use...");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Unable to open link that was clicked.");
-            }
-        }
-
-        //============================================================================================================-UI-Elements-==========================================================================================================
     }
+
+    //============================================================================================================-UI-Elements-==========================================================================================================
 }
