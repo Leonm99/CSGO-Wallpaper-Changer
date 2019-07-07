@@ -17,7 +17,7 @@
 
         public string activeWallpaper = @"no wallpaper"; //Wallpaper thats currently active.
         public string csgoInstallPath; //CS:GOs installation path.
-        public string currentVersion = @"1.0"; //Version.
+        public string currentVersion = @"1.1"; //Version.
         public string panoramaWallpaperPath; //Original wallpaper Path.
         public string panoramaWallpaperStoragePath = "Folder not selected..."; //Saved wallpaper path.
         public string saveFile = "C:\\ProgramData\\Panorama Wallpaper Changer\\saveddata.txt"; //Savefile path.
@@ -51,7 +51,7 @@
             // Configure color schema
             materialSkinManager.ColorScheme = new ColorScheme(
                 Primary.BlueGrey800, Primary.BlueGrey900,
-                Primary.BlueGrey800, Accent.DeepOrange400,
+                Primary.BlueGrey800, Accent.Orange200,
                 TextShade.WHITE
             );
         }
@@ -82,7 +82,7 @@
                     selectedWallpaper = wallpapers[i];
 
                     //if wallpaper isnt active and has a sirocco.webm then set it as active
-                    if (selectedWallpaper != activeWallpaper && System.IO.File.Exists(selectedWallpaper + "\\sirocco.webm"))
+                    if (selectedWallpaper != activeWallpaper && System.IO.File.Exists(selectedWallpaper))
                     {
                         SetWallpaper();
                         break;
@@ -236,30 +236,15 @@
 
         public void SetWallpaper()
         {
-            string sirocco1 = selectedWallpaper + "\\sirocco.webm";
-            string sirocco2 = selectedWallpaper + "\\sirocco540.webm";
-            string sirocco3 = selectedWallpaper + "\\sirocco720.webm";
-
             //Replace active wallpaper with new wallpaper
-            if (System.IO.File.Exists(sirocco1))
+            if (System.IO.File.Exists(selectedWallpaper))
             {
                 //check if the needed file is there.
-                System.IO.File.Copy(sirocco1, panoramaWallpaperPath + "\\sirocco.webm", true);
-                AddText(richTextBox1, "Copy files...", lightbluegray);
-
-                if (System.IO.File.Exists(sirocco2))
-                {
-                    System.IO.File.Copy(sirocco2, panoramaWallpaperPath + "\\sirocco540.webm", true);
-                }
-
-                if (System.IO.File.Exists(sirocco3))
-                {
-                    System.IO.File.Copy(sirocco3, panoramaWallpaperPath + "\\sirocco720.webm", true);
-                }
+                System.IO.File.Copy(selectedWallpaper, panoramaWallpaperPath + "\\sirocco.webm", true);
             }
             else
             {
-                AddText(richTextBox1, "No sirocco.webm file found!", lightred);
+                AddText(richTextBox1, "No .webm file found!", lightred);
             }
 
             //Update activeWallpaper here and in save file
@@ -273,17 +258,11 @@
         {
             //gets wallpapers and lists them
             materialListView1.Items.Clear();
-            string[] files = Directory.GetFiles(panoramaWallpaperStoragePath);
-            string[] dirs = Directory.GetDirectories(panoramaWallpaperStoragePath);
+            string[] files = Directory.GetFiles(panoramaWallpaperStoragePath, "*.webm");
 
             foreach (string s in files)
             {
                 materialListView1.Items.Add(Path.GetFileName(s));
-            }
-
-            foreach (string dir in dirs)
-            {
-                materialListView1.Items.Add(Path.GetFileName(dir));
             }
         }
 
@@ -339,7 +318,7 @@
                 {
                     try
                     {
-                        wallpapers = Directory.GetDirectories(panoramaWallpaperStoragePath);
+                        wallpapers = Directory.GetFiles(panoramaWallpaperStoragePath, "*.webm");
                         materialSingleLineTextField1.Text = "" + panoramaWallpaperStoragePath;
                         AddText(richTextBox1, "Wallpaper path was found!", lightbluegray);
                         ShowWP();
@@ -355,12 +334,15 @@
                     //if path isnt set or doesnt exist promt user to choose.
                     MessageBox.Show("Wallpaper path is empty or doesnt exist!\n"
                         + "\n"
-                        + "Make sure that you’ve put your wallpapers in seperate folders in:\n"
+                        + "If you are running this program for the first time\n"
+                        + "you now need to set a wallpaper folder."
+                        + "\n"
+                        + "\n"
+                        + "Make sure that you’ve put your wallpapers in the folder:\n"
                         + panoramaWallpaperStoragePath
                         + "\n"
-                        + "\nIn the stored folder every wallpaper needs to be in a seperat folder.\n"
-                        + "In each folder you need 3 Webm files and you have to rename them to\n"
-                        + "[sirocco.webm], [sirocco540.webm] and [sirocco720.webm].\n"
+                        + "\nIn the choosen folder every wallpaper needs to be a .webm video file.\n"
+
                         + "You can download Webm files or just convert a normal video with an online Webm converter\n"
                         + "\n"
                         + "Now select your Wallpaper folder."
@@ -385,7 +367,7 @@
                     {
                         try
                         {
-                            wallpapers = Directory.GetDirectories(panoramaWallpaperStoragePath);
+                            wallpapers = Directory.GetFiles(panoramaWallpaperStoragePath, "*.webm");
                             AddText(richTextBox1, "Wallpaper path set to " + panoramaWallpaperStoragePath, lightbluegray);
                             ShowWP();
                         }
@@ -436,42 +418,6 @@
 
         //============================================================================================================-UI-Elements-==========================================================================================================
 
-        private void Button2_Click_1(object sender, EventArgs e)
-        {
-            ChooseWallpaper();
-        }
-
-        private void Button3_Click(object sender, EventArgs e)
-        {
-            //runCS
-            RunCS();
-        }
-
-        private void Button5_Click(object sender, EventArgs e)
-        {
-            //check selected item from list
-            try
-            {
-                if (materialListView1.SelectedItems != null)
-                {
-                    var sel = materialListView1.SelectedItems[0].Text;
-                    selectedWallpaper = panoramaWallpaperStoragePath + @"\" + sel;
-                    if (System.IO.File.Exists(selectedWallpaper + @"\sirocco.webm"))
-                    {
-                        SetWallpaper();
-                    }
-                    else
-                    {
-                        AddText(richTextBox1, "Selected item is not a Folder with a webm Wallpaper in it!", lightred);
-                    }
-                }
-            }
-            catch
-            {
-                AddText(richTextBox1, "No item selected!", lightred);
-            }
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             // this one is the start of everything bro.. like the big bang or some shit
@@ -483,62 +429,19 @@
             materialSingleLineTextField1.Focus();
             richTextBox1.BackColor = Color.FromArgb(55, 71, 79);
             button4.BackColor = Color.FromArgb(55, 71, 79);
+            materialListView1.HideSelection = true;
 
             Start();
         }
 
-        /*
-                private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
-                {// shows about section
-                }
-
-                private void GitHubToolStripMenuItem_Click(object sender, EventArgs e)
-                {
-                    //show my github page cause im fucking awesome
-                    try
-                    {
-                        System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Unable to open link that was clicked.");
-                    }
-                }
-
-                private void HelpToolStripMenuItem_Click(object sender, EventArgs e)
-                {
-                    AboutBox1 about = new AboutBox1();
-                    about.Show();
-                }
-
-                private void HowToToolStripMenuItem_Click(object sender, EventArgs e)
-                {
-                    //opens howto
-                    try
-                    {
-                        System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer/wiki/How-to-use...");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Unable to open link that was clicked.");
-                    }
-                }
-
-                */
-
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void RichTextBox1_TextChanged(object sender, EventArgs e)
         {
-            //launches explorer in the wallpaper path
-            if (Directory.Exists(panoramaWallpaperStoragePath))
-            {
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    Arguments = panoramaWallpaperStoragePath,
-                    FileName = "explorer.exe"
-                };
+            //much emptiness is present here but thats not your buisiness
+        }
 
-                Process.Start(startInfo);
-            }
+        private void Button4_Click_1(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void MaterialFlatButton1_Click_1(object sender, EventArgs e)
@@ -556,7 +459,7 @@
                 {
                     activeWallpaper = "no wallpaper";
 
-                    wallpapers = Directory.GetDirectories(dialog.FileName);
+                    wallpapers = Directory.GetFiles(dialog.FileName);
                     wallpaperAmount = wallpapers.Length;
 
                     WriteData();
@@ -570,7 +473,52 @@
             }
         }
 
-        private void MaterialFlatButton2_Click(object sender, EventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //launches explorer in the wallpaper path
+            if (Directory.Exists(panoramaWallpaperStoragePath))
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    Arguments = panoramaWallpaperStoragePath,
+                    FileName = "explorer.exe"
+                };
+
+                Process.Start(startInfo);
+            }
+        }
+
+        private void MaterialRaisedButton1_Click(object sender, EventArgs e)
+        {
+            //check selected item from list
+            try
+            {
+                if (materialListView1.SelectedItems != null)
+                {
+                    var sel = materialListView1.SelectedItems[0].Text;
+                    selectedWallpaper = panoramaWallpaperStoragePath + @"\" + sel;
+                    if (System.IO.File.Exists(selectedWallpaper))
+                    {
+                        SetWallpaper();
+                    }
+                    else
+                    {
+                        AddText(richTextBox1, "Selected item is not a Folder with a webm Wallpaper in it!", lightred);
+                    }
+                }
+            }
+            catch
+            {
+                AddText(richTextBox1, "No item selected!", lightred);
+            }
+        }
+
+        private void MaterialRaisedButton2_Click(object sender, EventArgs e)
+        {
+            ChooseWallpaper();
+        }
+
+        private void MaterialRaisedButton3_Click(object sender, EventArgs e)
         {
             //creates the shortcut
             DialogResult result = MessageBox.Show("This will create a shortcut for CSGO on your Desktop.\nif you use it it will randomly change the wallpaper and then start CSGO.", "Confirmation", MessageBoxButtons.YesNoCancel);
@@ -595,14 +543,34 @@
             }
         }
 
-        private void RichTextBox1_TextChanged(object sender, EventArgs e)
+        private void MaterialRaisedButton4_Click(object sender, EventArgs e)
         {
-            //much emptiness is present here but thats not your buisiness
+            RunCS();
         }
 
-        private void Button4_Click_1(object sender, EventArgs e)
+        private void LinkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            richTextBox1.Clear();
+            try
+            {
+                System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to open link that was clicked.");
+            }
+        }
+
+        private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //opens howto
+            try
+            {
+                System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer/wiki/How-to-use...");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to open link that was clicked.");
+            }
         }
 
         //============================================================================================================-UI-Elements-==========================================================================================================

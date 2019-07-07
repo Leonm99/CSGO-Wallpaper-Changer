@@ -8,8 +8,8 @@
     {
         internal static void Main(string[] args)
         {
-            string currentVersion = @"1.0";
-            string saveFileVersion = @"1.0";
+            string currentVersion = @"1.1";
+            string saveFileVersion = @"1.1";
 
             int wallpaperAmount;
 
@@ -40,7 +40,7 @@
                 activeWallpaper = sr.ReadLine();
             }
 
-            wallpapers = Directory.GetDirectories(panoramaWallpaperStoragePath);
+            wallpapers = Directory.GetFiles(panoramaWallpaperStoragePath, "*.webm");
 
             if (wallpapers != null)
             {
@@ -52,7 +52,7 @@
 
                     selectedWallpaper = wallpapers[i];
 
-                    if (File.Exists(selectedWallpaper + "\\sirocco.webm"))
+                    if (File.Exists(selectedWallpaper))
                     {
                         SetWallpaper();
                         break;
@@ -70,25 +70,13 @@
 
             void SetWallpaper()
             {
-                string sirocco1 = selectedWallpaper + "\\sirocco.webm";
-                string sirocco2 = selectedWallpaper + "\\sirocco540.webm";
-                string sirocco3 = selectedWallpaper + "\\sirocco720.webm";
+                string sirocco1 = selectedWallpaper;
 
                 //Replace active wallpaper with new wallpaper
                 if (System.IO.File.Exists(sirocco1))
                 {
                     //check if the needed file is there.
                     System.IO.File.Copy(sirocco1, panoramaWallpaperPath + "\\sirocco.webm", true);
-
-                    if (System.IO.File.Exists(sirocco2))
-                    {
-                        System.IO.File.Copy(sirocco2, panoramaWallpaperPath + "\\sirocco540.webm", true);
-                    }
-
-                    if (System.IO.File.Exists(sirocco3))
-                    {
-                        System.IO.File.Copy(sirocco3, panoramaWallpaperPath + "\\sirocco720.webm", true);
-                    }
                 }
 
                 //Update activeWallpaper here and in save file
