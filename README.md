@@ -58,7 +58,13 @@ This tool just makes things way easier😃
 Yes it is! you can even check the source code thats lit🔥
 
 ---
-
+# Special thanks to...  
+  
+  
+- **Gponez!** For his feedback and his helpfull feature suggestion.  
+- **UNIVERSEITYbree!** For his help with a bug he found.
+  
+---
 GNU
 
 
