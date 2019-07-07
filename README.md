@@ -1,22 +1,23 @@
 # CS:GO Wallpaper Changer
 CS:GO Wallpaper Changer is a small and easy tool to replace the background in the CS:GO main menu. (Panorama)
-![alt text](https://i.postimg.cc/15zCL5mq/CSGO-WPC.jpg "CS:GO Wallpaper Changer")  
+![alt text](https://s17.directupload.net/images/190707/xo2subzs.png "CS:GO Wallpaper Changer")  
   
 --- 
 # Features
   - [x] Choose the wallpaper you want.
   - [x] Randomly choose a wallpaper.
   - [x] Create Shortcut for CS:GO, wallpaper changes on every start.
-  - [x] Wallpaper can even be changed when in game through the program!
+  - [x] Wallpaper can even be changed when in game through the program! 
+  - [x] Accept WEBM file as wallpaper without extra folders.
+  - [x] Material design.
 
 # Features I want to add.
 
   - [ ] Bind a hotkey for changing the wallpaper in-game.
   - [ ] Change wallpaper every X-minutes.
   - [ ] Implement an option to select video file name in case of CS:GO using another video file than sirocco
-  - [ ] Material redesign.
   - [ ] convert pictures&videos directly in the program.
-  - [ ] Accept Pictures and videos as wallpaper without extra folders.
+ 
 
 --- 
 
