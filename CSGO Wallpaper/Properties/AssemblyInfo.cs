@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
 [assembly: AssemblyTitle("CSGO Wallpaper Changer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A simple tool for CS:GO")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Leon M")]
 [assembly: AssemblyProduct("CSGO Wallpaper")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Die folgende GUID bestimmt die ID der Typbibliothek, wenn dieses Projekt für COM verfügbar gemacht wird
-[assembly: Guid("6741684c-31ac-4ade-8485-7cf5de7f554c")]
+[assembly: Guid("a9fb8360-bcc2-46bc-835d-37d8bdb35d81")]
 
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //
@@ -32,4 +32,4 @@ using System.Runtime.InteropServices;
 // indem Sie "*" wie unten gezeigt eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1")]
-[assembly: AssemblyFileVersion("1")]
+[assembly: AssemblyFileVersion("1.1")]
