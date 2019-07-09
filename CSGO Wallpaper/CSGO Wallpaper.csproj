@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CSGOWallpaperIcon.ico" />
+    <None Include="Resources\csgo_colortext.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

@@ -8,8 +8,8 @@
     {
         internal static void Main(string[] args)
         {
-            string currentVersion = @"1.1";
-            string saveFileVersion = @"1.1";
+            string currentVersion = @"1.2";
+            string saveFileVersion = @"1.2";
 
             int wallpaperAmount;
 

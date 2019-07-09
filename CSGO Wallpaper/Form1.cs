@@ -17,7 +17,7 @@
 
         public string activeWallpaper = @"no wallpaper"; //Wallpaper thats currently active.
         public string csgoInstallPath; //CS:GOs installation path.
-        public string currentVersion = @"1.1"; //Version.
+        public string currentVersion = @"1.2"; //Version.
         public string panoramaWallpaperPath; //Original wallpaper Path.
         public string panoramaWallpaperStoragePath = "Folder not selected..."; //Saved wallpaper path.
         public string saveFile = "C:\\ProgramData\\Panorama Wallpaper Changer\\saveddata.txt"; //Savefile path.
@@ -388,21 +388,27 @@
                 }
                 else
                 {
-                    //If amount of wallpapers from save file and actual amount is not equal, change it.
-                    if (wallpaperAmount != wallpapers.Length)
-                    {
-                        if (wallpapers.Length < wallpaperAmount)
+                    try
+                    {  //If amount of wallpapers from save file and actual amount is not equal, change it.
+                        if (wallpaperAmount != wallpapers.Length)
                         {
-                            AddText(richTextBox1, "Removed " + "" + (wallpaperAmount - wallpapers.Length) + " wallpapers.", lightbluegray);
+                            if (wallpapers.Length < wallpaperAmount)
+                            {
+                                AddText(richTextBox1, "Removed " + "" + (wallpaperAmount - wallpapers.Length) + " wallpapers.", lightbluegray);
+                            }
+                            else
+                            {
+                                AddText(richTextBox1, "Added " + "" + (wallpapers.Length - wallpaperAmount) + " wallpapers.", lightbluegray);
+                            }
+                            wallpaperAmount = wallpapers.Length;
                         }
-                        else
-                        {
-                            AddText(richTextBox1, "Added " + "" + (wallpapers.Length - wallpaperAmount) + " wallpapers.", lightbluegray);
-                        }
-                        wallpaperAmount = wallpapers.Length;
-                    }
 
-                    WriteData();
+                        WriteData();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Folder is empty! \n Please add .webm video files to the folder or select another folder.");
+                    }
                 }
             }
             else
@@ -607,7 +613,65 @@
         {
             //much emptiness is present here but thats not your buisiness
         }
-    }
 
-    //============================================================================================================-UI-Elements-==========================================================================================================
+        private void MaterialFlatButton3_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(panoramaWallpaperStoragePath) && Directory.GetFileSystemEntries(panoramaWallpaperStoragePath).Length != 0)
+            {
+                try
+                {
+                    wallpapers = Directory.GetFiles(panoramaWallpaperStoragePath, "*.webm");
+
+                    ShowWP();
+
+                    if (wallpaperAmount != wallpapers.Length)
+                    {
+                        if (wallpapers.Length < wallpaperAmount)
+                        {
+                            AddText(richTextBox1, "Removed " + "" + (wallpaperAmount - wallpapers.Length) + " wallpapers.", lightbluegray);
+                        }
+                        else
+                        {
+                            AddText(richTextBox1, "Added " + "" + (wallpapers.Length - wallpaperAmount) + " wallpapers.", lightbluegray);
+                        }
+                        wallpaperAmount = wallpapers.Length;
+                        WriteData();
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    //If path is empty, go to setup
+                }
+            }
+        }
+
+        private void MaterialRaisedButton5_Click(object sender, EventArgs e)
+        {
+            if (!System.IO.File.Exists(csgoInstallPath + "\\csgo\\resource\\csgo_colortext.txt"))
+            {
+                System.IO.File.WriteAllText(csgoInstallPath + "\\csgo\\resource\\csgo_colortext.txt", CSGO_Wallpaper_Changer.Properties.Resources.csgo_colortext);
+                MessageBox.Show("The mod will only work if you add [ -language colortext ] to your launch options, so please do that now for the effects wont show!", "Please add to launchoptions...");
+                AddText(richTextBox1, "Added Color Text Mod by BananaGaming", lightgreen);
+            }
+            else
+            {
+                MessageBox.Show("The file is already there, please add [ -language colortext ] to your CS:GO launchoptions!", "File already exists!");
+            }
+        }
+
+        private void MaterialRaisedButton6_Click(object sender, EventArgs e)
+        {
+            if (System.IO.File.Exists(csgoInstallPath + "\\csgo\\resource\\csgo_colortext.txt"))
+            {
+                System.IO.File.Delete(csgoInstallPath + "\\csgo\\resource\\csgo_colortext.txt");
+                AddText(richTextBox1, "Text color mod removed succesfully!", lightred);
+            }
+            else
+            {
+                MessageBox.Show("The mod is already removed! make sure you delete the part from it from the launch options.", "Already removed..");
+            }
+        }
+    }
 }
+
+//============================================================================================================-UI-Elements-==========================================================================================================

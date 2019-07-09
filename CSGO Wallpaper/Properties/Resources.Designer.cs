@@ -59,5 +59,33 @@ namespace CSGO_Wallpaper_Changer.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die // Text color mod 4.0
+        ///// Original idea by Orel &amp; spddl
+        ///// Rewritten and edited by BananaGaming since Version 1.0
+        ///// Changed for Panorama UI
+        ///&quot;lang&quot;
+        ///{
+        ///&quot;Language&quot; &quot;English&quot;
+        ///&quot;Tokens&quot;
+        ///{ 
+        ///// -------------------------------------------------------------------------------------------
+        ///	// MATCH READY BUTTON
+        ///	
+        ///		&quot;match_ready_accept&quot;				&quot;ACCEPT&quot;
+        ///		
+        ///	// SKILL GROUPS
+        ///	
+        ///		&quot;skillgroup_1&quot;						&quot;(1/18) Silver I&quot;
+        ///		&quot;skillgroup_2&quot;						&quot;(2/18) Silver II&quot;
+        ///		&quot;skillgroup_3&quot;						&quot;(3/18) Silver III&quot;
+        ///		&quot;skillgroup_4&quot;						&quot;(4 [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        internal static string csgo_colortext {
+            get {
+                return ResourceManager.GetString("csgo_colortext", resourceCulture);
+            }
+        }
     }
 }
