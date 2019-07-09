@@ -3,6 +3,8 @@ CS:GO Wallpaper Changer is a small and easy tool to replace the background in th
 ![alt text](https://s17.directupload.net/images/190707/xo2subzs.png "CS:GO Wallpaper Changer")  
   ---   
   ### [Virus scan by virustotal.com](https://www.virustotal.com/gui/file/7b866a093757c97850293506fb4aa5b30e6715ce3f3e6214d399dd1c30481fb4/detection)  
+  ---
+  ### [In-Game Screenshots from the Wallpaper](https://github.com/Leonm99/CSGO-Wallpaper-Changer/wiki/Preview)  
   
 --- 
 # Features
