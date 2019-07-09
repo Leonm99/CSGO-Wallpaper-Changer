@@ -70,7 +70,7 @@ Yes it is! you can even check the source code thats lit🔥
   
 - **Gponez!** For his feedback and his helpfull feature suggestion.  
 - **UNIVERSEITYbree!** For his help with a bug he found.
-- **[Bananagaming](https://bananagaming.tv/)**
+- **[Bananagaming!](https://bananagaming.tv/)** For his text color mod.
   
 ---
 GNU
