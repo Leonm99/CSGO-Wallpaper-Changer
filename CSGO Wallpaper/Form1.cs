@@ -321,6 +321,7 @@
                         materialSingleLineTextField1.Text = "" + panoramaWallpaperStoragePath;
                         AddText(richTextBox1, "Wallpaper path was found!", lightbluegray);
                         ShowWP();
+                        materialSingleLineTextField3.Text = "" + activeWallpaper.Remove(0, panoramaWallpaperStoragePath.Length + 1);
                     }
                     catch (ArgumentException)
                     {
@@ -435,7 +436,6 @@
             desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             thisdir = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
             materialSingleLineTextField1.Text = "" + panoramaWallpaperStoragePath;
-            materialSingleLineTextField2.Text = "" + csgoInstallPath;
             materialSingleLineTextField1.SelectAll();
             materialSingleLineTextField1.Focus();
             richTextBox1.BackColor = Color.FromArgb(55, 71, 79);
@@ -549,6 +549,37 @@
             }
         }
 
+        private void MaterialFlatButton3_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(panoramaWallpaperStoragePath) && Directory.GetFileSystemEntries(panoramaWallpaperStoragePath).Length != 0)
+            {
+                try
+                {
+                    wallpapers = Directory.GetFiles(panoramaWallpaperStoragePath, "*.webm");
+
+                    ShowWP();
+
+                    if (wallpaperAmount != wallpapers.Length)
+                    {
+                        if (wallpapers.Length < wallpaperAmount)
+                        {
+                            AddText(richTextBox1, "Removed " + "" + (wallpaperAmount - wallpapers.Length) + " wallpapers.", lightbluegray);
+                        }
+                        else
+                        {
+                            AddText(richTextBox1, "Added " + "" + (wallpapers.Length - wallpaperAmount) + " wallpapers.", lightbluegray);
+                        }
+                        wallpaperAmount = wallpapers.Length;
+                        WriteData();
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    //If path is empty, go to setup
+                }
+            }
+        }
+
         private void MaterialRaisedButton1_Click(object sender, EventArgs e)
         {
             //check selected item from list
@@ -561,6 +592,7 @@
                     if (System.IO.File.Exists(selectedWallpaper))
                     {
                         SetWallpaper();
+                        materialSingleLineTextField3.Text = "" + sel;
                     }
                     else
                     {
@@ -609,42 +641,6 @@
             RunCS();
         }
 
-        private void RichTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            //much emptiness is present here but thats not your buisiness
-        }
-
-        private void MaterialFlatButton3_Click(object sender, EventArgs e)
-        {
-            if (Directory.Exists(panoramaWallpaperStoragePath) && Directory.GetFileSystemEntries(panoramaWallpaperStoragePath).Length != 0)
-            {
-                try
-                {
-                    wallpapers = Directory.GetFiles(panoramaWallpaperStoragePath, "*.webm");
-
-                    ShowWP();
-
-                    if (wallpaperAmount != wallpapers.Length)
-                    {
-                        if (wallpapers.Length < wallpaperAmount)
-                        {
-                            AddText(richTextBox1, "Removed " + "" + (wallpaperAmount - wallpapers.Length) + " wallpapers.", lightbluegray);
-                        }
-                        else
-                        {
-                            AddText(richTextBox1, "Added " + "" + (wallpapers.Length - wallpaperAmount) + " wallpapers.", lightbluegray);
-                        }
-                        wallpaperAmount = wallpapers.Length;
-                        WriteData();
-                    }
-                }
-                catch (ArgumentException)
-                {
-                    //If path is empty, go to setup
-                }
-            }
-        }
-
         private void MaterialRaisedButton5_Click(object sender, EventArgs e)
         {
             if (!System.IO.File.Exists(csgoInstallPath + "\\csgo\\resource\\csgo_colortext.txt"))
@@ -670,6 +666,16 @@
             {
                 MessageBox.Show("The mod is already removed! make sure you delete the part from it from the launch options.", "Already removed..");
             }
+        }
+
+        private void MaterialTabSelector1_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(csgoInstallPath)) { materialSingleLineTextField2.Text = "" + csgoInstallPath; }
+        }
+
+        private void RichTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            //much emptiness is present here but thats not your buisiness
         }
     }
 }
