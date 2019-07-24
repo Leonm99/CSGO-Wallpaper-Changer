@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>CSGOWallpaperIcon.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>CSGO_Wallpaper.Program</StartupObject>
@@ -110,6 +110,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CSGOWallpaperIcon.ico" />
+    <Content Include="icon.ico" />
     <None Include="Resources\csgo_colortext.txt" />
   </ItemGroup>
   <ItemGroup>
