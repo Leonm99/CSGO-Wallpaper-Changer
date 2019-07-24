@@ -37,23 +37,28 @@ namespace CSGO_Wallpaper
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.Home = new System.Windows.Forms.TabPage();
             this.materialSingleLineTextField3 = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.materialFlatButton3 = new MaterialSkin.Controls.MaterialFlatButton();
-            this.materialRaisedButton4 = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.materialRaisedButton3 = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.materialRaisedButton2 = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.materialRaisedButton1 = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.Refresh_wallpaper_button = new MaterialSkin.Controls.MaterialFlatButton();
+            this.Start_cs_button = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.Shortcut_button = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.Random_wallpaper = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.Change_selected_wallpaper = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialListView1 = new MaterialSkin.Controls.MaterialListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.materialFlatButton1 = new MaterialSkin.Controls.MaterialFlatButton();
+            this.Change_wallpaper_path_button = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.Tools = new System.Windows.Forms.TabPage();
+            this.materialSingleLineTextField4 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.Change_FileToReplace_button = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.Change_CSGOfolder_button = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialRaisedButton6 = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.materialRaisedButton5 = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialFlatButton2 = new MaterialSkin.Controls.MaterialFlatButton();
+            this.Remove_textColorMod_button = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.Add_textColorMod_button = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialSingleLineTextField2 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.About = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -88,13 +93,13 @@ namespace CSGO_Wallpaper
             // 
             this.Home.BackColor = System.Drawing.Color.White;
             this.Home.Controls.Add(this.materialSingleLineTextField3);
-            this.Home.Controls.Add(this.materialFlatButton3);
-            this.Home.Controls.Add(this.materialRaisedButton4);
-            this.Home.Controls.Add(this.materialRaisedButton3);
-            this.Home.Controls.Add(this.materialRaisedButton2);
-            this.Home.Controls.Add(this.materialRaisedButton1);
+            this.Home.Controls.Add(this.Refresh_wallpaper_button);
+            this.Home.Controls.Add(this.Start_cs_button);
+            this.Home.Controls.Add(this.Shortcut_button);
+            this.Home.Controls.Add(this.Random_wallpaper);
+            this.Home.Controls.Add(this.Change_selected_wallpaper);
             this.Home.Controls.Add(this.materialListView1);
-            this.Home.Controls.Add(this.materialFlatButton1);
+            this.Home.Controls.Add(this.Change_wallpaper_path_button);
             this.Home.Controls.Add(this.materialSingleLineTextField1);
             this.Home.Location = new System.Drawing.Point(4, 4);
             this.Home.Margin = new System.Windows.Forms.Padding(0);
@@ -123,86 +128,86 @@ namespace CSGO_Wallpaper
             this.materialSingleLineTextField3.TabStop = false;
             this.materialSingleLineTextField3.UseSystemPasswordChar = false;
             // 
-            // materialFlatButton3
+            // Refresh_wallpaper_button
             // 
-            this.materialFlatButton3.AutoSize = true;
-            this.materialFlatButton3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialFlatButton3.Depth = 0;
-            this.materialFlatButton3.Icon = ((System.Drawing.Image)(resources.GetObject("materialFlatButton3.Icon")));
-            this.materialFlatButton3.Location = new System.Drawing.Point(500, 0);
-            this.materialFlatButton3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialFlatButton3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFlatButton3.Name = "materialFlatButton3";
-            this.materialFlatButton3.Primary = false;
-            this.materialFlatButton3.Size = new System.Drawing.Size(44, 36);
-            this.materialFlatButton3.TabIndex = 45;
-            this.materialFlatButton3.UseVisualStyleBackColor = true;
-            this.materialFlatButton3.Click += new System.EventHandler(this.MaterialFlatButton3_Click);
+            this.Refresh_wallpaper_button.AutoSize = true;
+            this.Refresh_wallpaper_button.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Refresh_wallpaper_button.Depth = 0;
+            this.Refresh_wallpaper_button.Icon = ((System.Drawing.Image)(resources.GetObject("Refresh_wallpaper_button.Icon")));
+            this.Refresh_wallpaper_button.Location = new System.Drawing.Point(500, 0);
+            this.Refresh_wallpaper_button.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.Refresh_wallpaper_button.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Refresh_wallpaper_button.Name = "Refresh_wallpaper_button";
+            this.Refresh_wallpaper_button.Primary = false;
+            this.Refresh_wallpaper_button.Size = new System.Drawing.Size(44, 36);
+            this.Refresh_wallpaper_button.TabIndex = 45;
+            this.Refresh_wallpaper_button.UseVisualStyleBackColor = true;
+            this.Refresh_wallpaper_button.Click += new System.EventHandler(this.Refresh_wallpaper_button_Click);
             // 
-            // materialRaisedButton4
+            // Start_cs_button
             // 
-            this.materialRaisedButton4.AutoSize = true;
-            this.materialRaisedButton4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialRaisedButton4.Depth = 0;
-            this.materialRaisedButton4.Icon = ((System.Drawing.Image)(resources.GetObject("materialRaisedButton4.Icon")));
-            this.materialRaisedButton4.Location = new System.Drawing.Point(202, 356);
-            this.materialRaisedButton4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialRaisedButton4.Name = "materialRaisedButton4";
-            this.materialRaisedButton4.Primary = true;
-            this.materialRaisedButton4.Size = new System.Drawing.Size(135, 36);
-            this.materialRaisedButton4.TabIndex = 44;
-            this.materialRaisedButton4.Text = "Start CS:GO";
-            this.materialRaisedButton4.UseVisualStyleBackColor = true;
-            this.materialRaisedButton4.Click += new System.EventHandler(this.MaterialRaisedButton4_Click);
+            this.Start_cs_button.AutoSize = true;
+            this.Start_cs_button.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Start_cs_button.Depth = 0;
+            this.Start_cs_button.Icon = ((System.Drawing.Image)(resources.GetObject("Start_cs_button.Icon")));
+            this.Start_cs_button.Location = new System.Drawing.Point(202, 356);
+            this.Start_cs_button.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Start_cs_button.Name = "Start_cs_button";
+            this.Start_cs_button.Primary = true;
+            this.Start_cs_button.Size = new System.Drawing.Size(135, 36);
+            this.Start_cs_button.TabIndex = 44;
+            this.Start_cs_button.Text = "Start CS:GO";
+            this.Start_cs_button.UseVisualStyleBackColor = true;
+            this.Start_cs_button.Click += new System.EventHandler(this.Start_cs_button_Click);
             // 
-            // materialRaisedButton3
+            // Shortcut_button
             // 
-            this.materialRaisedButton3.AutoSize = true;
-            this.materialRaisedButton3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialRaisedButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.materialRaisedButton3.Depth = 0;
-            this.materialRaisedButton3.Icon = ((System.Drawing.Image)(resources.GetObject("materialRaisedButton3.Icon")));
-            this.materialRaisedButton3.Location = new System.Drawing.Point(268, 314);
-            this.materialRaisedButton3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialRaisedButton3.Name = "materialRaisedButton3";
-            this.materialRaisedButton3.Primary = true;
-            this.materialRaisedButton3.Size = new System.Drawing.Size(174, 36);
-            this.materialRaisedButton3.TabIndex = 43;
-            this.materialRaisedButton3.Text = "Create Shortcut";
-            this.materialRaisedButton3.UseVisualStyleBackColor = true;
-            this.materialRaisedButton3.Click += new System.EventHandler(this.MaterialRaisedButton3_Click);
+            this.Shortcut_button.AutoSize = true;
+            this.Shortcut_button.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Shortcut_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Shortcut_button.Depth = 0;
+            this.Shortcut_button.Icon = ((System.Drawing.Image)(resources.GetObject("Shortcut_button.Icon")));
+            this.Shortcut_button.Location = new System.Drawing.Point(268, 314);
+            this.Shortcut_button.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Shortcut_button.Name = "Shortcut_button";
+            this.Shortcut_button.Primary = true;
+            this.Shortcut_button.Size = new System.Drawing.Size(174, 36);
+            this.Shortcut_button.TabIndex = 43;
+            this.Shortcut_button.Text = "Create Shortcut";
+            this.Shortcut_button.UseVisualStyleBackColor = true;
+            this.Shortcut_button.Click += new System.EventHandler(this.Shortcut_button_Click);
             // 
-            // materialRaisedButton2
+            // Random_wallpaper
             // 
-            this.materialRaisedButton2.AutoSize = true;
-            this.materialRaisedButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialRaisedButton2.Depth = 0;
-            this.materialRaisedButton2.Icon = ((System.Drawing.Image)(resources.GetObject("materialRaisedButton2.Icon")));
-            this.materialRaisedButton2.Location = new System.Drawing.Point(7, 356);
-            this.materialRaisedButton2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialRaisedButton2.Name = "materialRaisedButton2";
-            this.materialRaisedButton2.Primary = true;
-            this.materialRaisedButton2.Size = new System.Drawing.Size(189, 36);
-            this.materialRaisedButton2.TabIndex = 42;
-            this.materialRaisedButton2.Text = "Random wallpaper";
-            this.materialRaisedButton2.UseVisualStyleBackColor = true;
-            this.materialRaisedButton2.Click += new System.EventHandler(this.MaterialRaisedButton2_Click);
+            this.Random_wallpaper.AutoSize = true;
+            this.Random_wallpaper.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Random_wallpaper.Depth = 0;
+            this.Random_wallpaper.Icon = ((System.Drawing.Image)(resources.GetObject("Random_wallpaper.Icon")));
+            this.Random_wallpaper.Location = new System.Drawing.Point(7, 356);
+            this.Random_wallpaper.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Random_wallpaper.Name = "Random_wallpaper";
+            this.Random_wallpaper.Primary = true;
+            this.Random_wallpaper.Size = new System.Drawing.Size(189, 36);
+            this.Random_wallpaper.TabIndex = 42;
+            this.Random_wallpaper.Text = "Random wallpaper";
+            this.Random_wallpaper.UseVisualStyleBackColor = true;
+            this.Random_wallpaper.Click += new System.EventHandler(this.Random_wallpaper_Click);
             // 
-            // materialRaisedButton1
+            // Change_selected_wallpaper
             // 
-            this.materialRaisedButton1.AutoSize = true;
-            this.materialRaisedButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialRaisedButton1.Depth = 0;
-            this.materialRaisedButton1.Icon = ((System.Drawing.Image)(resources.GetObject("materialRaisedButton1.Icon")));
-            this.materialRaisedButton1.Location = new System.Drawing.Point(7, 314);
-            this.materialRaisedButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialRaisedButton1.Name = "materialRaisedButton1";
-            this.materialRaisedButton1.Primary = true;
-            this.materialRaisedButton1.Size = new System.Drawing.Size(255, 36);
-            this.materialRaisedButton1.TabIndex = 41;
-            this.materialRaisedButton1.Text = "Change selected wallpaper";
-            this.materialRaisedButton1.UseVisualStyleBackColor = true;
-            this.materialRaisedButton1.Click += new System.EventHandler(this.MaterialRaisedButton1_Click);
+            this.Change_selected_wallpaper.AutoSize = true;
+            this.Change_selected_wallpaper.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Change_selected_wallpaper.Depth = 0;
+            this.Change_selected_wallpaper.Icon = ((System.Drawing.Image)(resources.GetObject("Change_selected_wallpaper.Icon")));
+            this.Change_selected_wallpaper.Location = new System.Drawing.Point(7, 314);
+            this.Change_selected_wallpaper.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Change_selected_wallpaper.Name = "Change_selected_wallpaper";
+            this.Change_selected_wallpaper.Primary = true;
+            this.Change_selected_wallpaper.Size = new System.Drawing.Size(255, 36);
+            this.Change_selected_wallpaper.TabIndex = 41;
+            this.Change_selected_wallpaper.Text = "Change selected wallpaper";
+            this.Change_selected_wallpaper.UseVisualStyleBackColor = true;
+            this.Change_selected_wallpaper.Click += new System.EventHandler(this.Change_selected_wallpaper_Click);
             // 
             // materialListView1
             // 
@@ -234,24 +239,24 @@ namespace CSGO_Wallpaper
             this.columnHeader1.Text = "Current wallpaper:";
             this.columnHeader1.Width = 550;
             // 
-            // materialFlatButton1
+            // Change_wallpaper_path_button
             // 
-            this.materialFlatButton1.AutoSize = true;
-            this.materialFlatButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialFlatButton1.Depth = 0;
-            this.materialFlatButton1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.materialFlatButton1.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.materialFlatButton1.Icon = null;
-            this.materialFlatButton1.Location = new System.Drawing.Point(7, 407);
-            this.materialFlatButton1.Margin = new System.Windows.Forms.Padding(0);
-            this.materialFlatButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFlatButton1.Name = "materialFlatButton1";
-            this.materialFlatButton1.Primary = false;
-            this.materialFlatButton1.Size = new System.Drawing.Size(57, 36);
-            this.materialFlatButton1.TabIndex = 35;
-            this.materialFlatButton1.Text = "Open";
-            this.materialFlatButton1.UseVisualStyleBackColor = true;
-            this.materialFlatButton1.Click += new System.EventHandler(this.MaterialFlatButton1_Click_1);
+            this.Change_wallpaper_path_button.AutoSize = true;
+            this.Change_wallpaper_path_button.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Change_wallpaper_path_button.Depth = 0;
+            this.Change_wallpaper_path_button.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.Change_wallpaper_path_button.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Change_wallpaper_path_button.Icon = null;
+            this.Change_wallpaper_path_button.Location = new System.Drawing.Point(7, 407);
+            this.Change_wallpaper_path_button.Margin = new System.Windows.Forms.Padding(0);
+            this.Change_wallpaper_path_button.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Change_wallpaper_path_button.Name = "Change_wallpaper_path_button";
+            this.Change_wallpaper_path_button.Primary = false;
+            this.Change_wallpaper_path_button.Size = new System.Drawing.Size(57, 36);
+            this.Change_wallpaper_path_button.TabIndex = 35;
+            this.Change_wallpaper_path_button.Text = "Open";
+            this.Change_wallpaper_path_button.UseVisualStyleBackColor = true;
+            this.Change_wallpaper_path_button.Click += new System.EventHandler(this.Change_wallpaper_path_button_Click_1);
             // 
             // materialSingleLineTextField1
             // 
@@ -274,17 +279,69 @@ namespace CSGO_Wallpaper
             // Tools
             // 
             this.Tools.BackColor = System.Drawing.Color.White;
+            this.Tools.Controls.Add(this.materialSingleLineTextField4);
+            this.Tools.Controls.Add(this.Change_FileToReplace_button);
+            this.Tools.Controls.Add(this.Change_CSGOfolder_button);
             this.Tools.Controls.Add(this.materialLabel2);
-            this.Tools.Controls.Add(this.materialRaisedButton6);
-            this.Tools.Controls.Add(this.materialRaisedButton5);
-            this.Tools.Controls.Add(this.materialLabel1);
-            this.Tools.Controls.Add(this.materialFlatButton2);
+            this.Tools.Controls.Add(this.Remove_textColorMod_button);
+            this.Tools.Controls.Add(this.Add_textColorMod_button);
             this.Tools.Controls.Add(this.materialSingleLineTextField2);
             this.Tools.Location = new System.Drawing.Point(4, 4);
             this.Tools.Name = "Tools";
             this.Tools.Size = new System.Drawing.Size(573, 502);
             this.Tools.TabIndex = 2;
             this.Tools.Text = "Tools";
+            // 
+            // materialSingleLineTextField4
+            // 
+            this.materialSingleLineTextField4.Depth = 0;
+            this.materialSingleLineTextField4.Enabled = false;
+            this.materialSingleLineTextField4.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.materialSingleLineTextField4.Hint = "";
+            this.materialSingleLineTextField4.Location = new System.Drawing.Point(250, 52);
+            this.materialSingleLineTextField4.MaxLength = 32767;
+            this.materialSingleLineTextField4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialSingleLineTextField4.Name = "materialSingleLineTextField4";
+            this.materialSingleLineTextField4.PasswordChar = '\0';
+            this.materialSingleLineTextField4.SelectedText = "";
+            this.materialSingleLineTextField4.SelectionLength = 0;
+            this.materialSingleLineTextField4.SelectionStart = 0;
+            this.materialSingleLineTextField4.Size = new System.Drawing.Size(318, 23);
+            this.materialSingleLineTextField4.TabIndex = 43;
+            this.materialSingleLineTextField4.TabStop = false;
+            this.materialSingleLineTextField4.UseSystemPasswordChar = false;
+            // 
+            // Change_FileToReplace_button
+            // 
+            this.Change_FileToReplace_button.AutoSize = true;
+            this.Change_FileToReplace_button.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Change_FileToReplace_button.Depth = 0;
+            this.Change_FileToReplace_button.Icon = null;
+            this.Change_FileToReplace_button.Location = new System.Drawing.Point(12, 45);
+            this.Change_FileToReplace_button.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Change_FileToReplace_button.Name = "Change_FileToReplace_button";
+            this.Change_FileToReplace_button.Primary = true;
+            this.Change_FileToReplace_button.Size = new System.Drawing.Size(233, 36);
+            this.Change_FileToReplace_button.TabIndex = 42;
+            this.Change_FileToReplace_button.Text = "Change webm file to replace";
+            this.Change_FileToReplace_button.UseVisualStyleBackColor = true;
+            this.Change_FileToReplace_button.Click += new System.EventHandler(this.Change_FileToReplace_button_Click);
+            // 
+            // Change_CSGOfolder_button
+            // 
+            this.Change_CSGOfolder_button.AutoSize = true;
+            this.Change_CSGOfolder_button.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Change_CSGOfolder_button.Depth = 0;
+            this.Change_CSGOfolder_button.Icon = null;
+            this.Change_CSGOfolder_button.Location = new System.Drawing.Point(12, 3);
+            this.Change_CSGOfolder_button.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Change_CSGOfolder_button.Name = "Change_CSGOfolder_button";
+            this.Change_CSGOfolder_button.Primary = true;
+            this.Change_CSGOfolder_button.Size = new System.Drawing.Size(158, 36);
+            this.Change_CSGOfolder_button.TabIndex = 41;
+            this.Change_CSGOfolder_button.Text = "Change CS:GO path";
+            this.Change_CSGOfolder_button.UseVisualStyleBackColor = true;
+            this.Change_CSGOfolder_button.Click += new System.EventHandler(this.Change_CSGOfolder_button_Click);
             // 
             // materialLabel2
             // 
@@ -300,76 +357,45 @@ namespace CSGO_Wallpaper
             this.materialLabel2.Text = "Text color mod by\r\nBananaGaming";
             this.materialLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // materialRaisedButton6
+            // Remove_textColorMod_button
             // 
-            this.materialRaisedButton6.AutoSize = true;
-            this.materialRaisedButton6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialRaisedButton6.Depth = 0;
-            this.materialRaisedButton6.Icon = null;
-            this.materialRaisedButton6.Location = new System.Drawing.Point(366, 390);
-            this.materialRaisedButton6.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialRaisedButton6.Name = "materialRaisedButton6";
-            this.materialRaisedButton6.Primary = true;
-            this.materialRaisedButton6.Size = new System.Drawing.Size(193, 36);
-            this.materialRaisedButton6.TabIndex = 39;
-            this.materialRaisedButton6.Text = "Remove Text Color Mod";
-            this.materialRaisedButton6.UseVisualStyleBackColor = true;
-            this.materialRaisedButton6.Click += new System.EventHandler(this.MaterialRaisedButton6_Click);
+            this.Remove_textColorMod_button.AutoSize = true;
+            this.Remove_textColorMod_button.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Remove_textColorMod_button.Depth = 0;
+            this.Remove_textColorMod_button.Icon = null;
+            this.Remove_textColorMod_button.Location = new System.Drawing.Point(366, 390);
+            this.Remove_textColorMod_button.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Remove_textColorMod_button.Name = "Remove_textColorMod_button";
+            this.Remove_textColorMod_button.Primary = true;
+            this.Remove_textColorMod_button.Size = new System.Drawing.Size(193, 36);
+            this.Remove_textColorMod_button.TabIndex = 39;
+            this.Remove_textColorMod_button.Text = "Remove Text Color Mod";
+            this.Remove_textColorMod_button.UseVisualStyleBackColor = true;
+            this.Remove_textColorMod_button.Click += new System.EventHandler(this.Remove_textColorMod_button_Click);
             // 
-            // materialRaisedButton5
+            // Add_textColorMod_button
             // 
-            this.materialRaisedButton5.AutoSize = true;
-            this.materialRaisedButton5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialRaisedButton5.Depth = 0;
-            this.materialRaisedButton5.Icon = null;
-            this.materialRaisedButton5.Location = new System.Drawing.Point(12, 390);
-            this.materialRaisedButton5.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialRaisedButton5.Name = "materialRaisedButton5";
-            this.materialRaisedButton5.Primary = true;
-            this.materialRaisedButton5.Size = new System.Drawing.Size(166, 36);
-            this.materialRaisedButton5.TabIndex = 38;
-            this.materialRaisedButton5.Text = "Add Text Color Mod";
-            this.materialRaisedButton5.UseVisualStyleBackColor = true;
-            this.materialRaisedButton5.Click += new System.EventHandler(this.MaterialRaisedButton5_Click);
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(11, 11);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(341, 19);
-            this.materialLabel1.TabIndex = 37;
-            this.materialLabel1.Text = "Try to reselect the CS:GO path in case of an error.";
-            // 
-            // materialFlatButton2
-            // 
-            this.materialFlatButton2.AutoSize = true;
-            this.materialFlatButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialFlatButton2.Depth = 0;
-            this.materialFlatButton2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.materialFlatButton2.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.materialFlatButton2.Icon = null;
-            this.materialFlatButton2.Location = new System.Drawing.Point(5, 31);
-            this.materialFlatButton2.Margin = new System.Windows.Forms.Padding(0);
-            this.materialFlatButton2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFlatButton2.Name = "materialFlatButton2";
-            this.materialFlatButton2.Primary = false;
-            this.materialFlatButton2.Size = new System.Drawing.Size(158, 36);
-            this.materialFlatButton2.TabIndex = 36;
-            this.materialFlatButton2.Text = "Change CS:GO Path";
-            this.materialFlatButton2.UseVisualStyleBackColor = true;
-            this.materialFlatButton2.Click += new System.EventHandler(this.MaterialFlatButton2_Click);
+            this.Add_textColorMod_button.AutoSize = true;
+            this.Add_textColorMod_button.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Add_textColorMod_button.Depth = 0;
+            this.Add_textColorMod_button.Icon = null;
+            this.Add_textColorMod_button.Location = new System.Drawing.Point(12, 390);
+            this.Add_textColorMod_button.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Add_textColorMod_button.Name = "Add_textColorMod_button";
+            this.Add_textColorMod_button.Primary = true;
+            this.Add_textColorMod_button.Size = new System.Drawing.Size(166, 36);
+            this.Add_textColorMod_button.TabIndex = 38;
+            this.Add_textColorMod_button.Text = "Add Text Color Mod";
+            this.Add_textColorMod_button.UseVisualStyleBackColor = true;
+            this.Add_textColorMod_button.Click += new System.EventHandler(this.Add_textColorMod_button_Click);
             // 
             // materialSingleLineTextField2
             // 
             this.materialSingleLineTextField2.Depth = 0;
+            this.materialSingleLineTextField2.Enabled = false;
             this.materialSingleLineTextField2.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialSingleLineTextField2.Hint = "";
-            this.materialSingleLineTextField2.Location = new System.Drawing.Point(166, 36);
+            this.materialSingleLineTextField2.Location = new System.Drawing.Point(176, 10);
             this.materialSingleLineTextField2.MaxLength = 32767;
             this.materialSingleLineTextField2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField2.Name = "materialSingleLineTextField2";
@@ -377,7 +403,7 @@ namespace CSGO_Wallpaper
             this.materialSingleLineTextField2.SelectedText = "";
             this.materialSingleLineTextField2.SelectionLength = 0;
             this.materialSingleLineTextField2.SelectionStart = 0;
-            this.materialSingleLineTextField2.Size = new System.Drawing.Size(402, 23);
+            this.materialSingleLineTextField2.Size = new System.Drawing.Size(392, 23);
             this.materialSingleLineTextField2.TabIndex = 35;
             this.materialSingleLineTextField2.TabStop = false;
             this.materialSingleLineTextField2.UseSystemPasswordChar = false;
@@ -385,6 +411,10 @@ namespace CSGO_Wallpaper
             // About
             // 
             this.About.BackColor = System.Drawing.Color.White;
+            this.About.Controls.Add(this.label7);
+            this.About.Controls.Add(this.label6);
+            this.About.Controls.Add(this.label5);
+            this.About.Controls.Add(this.label4);
             this.About.Controls.Add(this.label3);
             this.About.Controls.Add(this.label2);
             this.About.Controls.Add(this.label1);
@@ -397,6 +427,54 @@ namespace CSGO_Wallpaper
             this.About.Size = new System.Drawing.Size(573, 502);
             this.About.TabIndex = 1;
             this.About.Text = "About";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Orange;
+            this.label7.Location = new System.Drawing.Point(270, 389);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(106, 18);
+            this.label7.TabIndex = 42;
+            this.label7.Text = "BananaGaming";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Roboto", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Orange;
+            this.label6.Location = new System.Drawing.Point(303, 36);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 33);
+            this.label6.TabIndex = 41;
+            this.label6.Text = "1.3";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Roboto", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Orange;
+            this.label5.Location = new System.Drawing.Point(176, 149);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(216, 25);
+            this.label5.TabIndex = 40;
+            this.label5.Text = "leonmisch@gmail.com\r\n";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Roboto", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Orange;
+            this.label4.Location = new System.Drawing.Point(285, 99);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 25);
+            this.label4.TabIndex = 39;
+            this.label4.Text = "Leon M.\r\n";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -429,7 +507,7 @@ namespace CSGO_Wallpaper
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(328, 66);
             this.label1.TabIndex = 36;
-            this.label1.Text = "CS:GO wallpaper changer \r\nversion 1.2\r\n";
+            this.label1.Text = "CS:GO wallpaper changer \r\nversion 1.3\r\n";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // linkLabel1
@@ -509,7 +587,7 @@ namespace CSGO_Wallpaper
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(907, 506);
+            this.ClientSize = new System.Drawing.Size(907, 504);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.materialTabSelector1);
@@ -547,18 +625,16 @@ namespace CSGO_Wallpaper
         private RichTextBox richTextBox1;
         private MaterialSkin.Controls.MaterialListView materialListView1;
         private ColumnHeader columnHeader1;
-        private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton1;
-        private MaterialSkin.Controls.MaterialFlatButton materialFlatButton1;
-        private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton2;
-        private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton3;
-        private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton4;
+        private MaterialSkin.Controls.MaterialRaisedButton Change_selected_wallpaper;
+        private MaterialSkin.Controls.MaterialFlatButton Change_wallpaper_path_button;
+        private MaterialSkin.Controls.MaterialRaisedButton Random_wallpaper;
+        private MaterialSkin.Controls.MaterialRaisedButton Shortcut_button;
+        private MaterialSkin.Controls.MaterialRaisedButton Start_cs_button;
         private TabPage Tools;
-        private MaterialSkin.Controls.MaterialFlatButton materialFlatButton2;
         private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private MaterialSkin.Controls.MaterialFlatButton materialFlatButton3;
-        private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton5;
-        private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton6;
+        private MaterialSkin.Controls.MaterialFlatButton Refresh_wallpaper_button;
+        private MaterialSkin.Controls.MaterialRaisedButton Add_textColorMod_button;
+        private MaterialSkin.Controls.MaterialRaisedButton Remove_textColorMod_button;
         private TabPage About;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField3;
@@ -567,6 +643,13 @@ namespace CSGO_Wallpaper
         private Label label3;
         private Label label2;
         private Label label1;
+        private Label label7;
+        private Label label6;
+        private Label label5;
+        private Label label4;
+        private MaterialSkin.Controls.MaterialRaisedButton Change_CSGOfolder_button;
+        private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField4;
+        private MaterialSkin.Controls.MaterialRaisedButton Change_FileToReplace_button;
     }
 
 

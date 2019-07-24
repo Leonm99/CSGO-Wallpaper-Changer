@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="materialFlatButton3.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Refresh_wallpaper_button.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAABGdBTUEAALGPC/xhBQAAAaBJREFUWEft
         1zsvBFEYh/H9AuIaEpcIJbVLI76AkPgCCgoSIi6taHQqFYVWJSrRIBQUegpBhWgliGvB80/2Td5Mdu2e
@@ -131,7 +131,7 @@
         AElFTkSuQmCC
 </value>
   </data>
-  <data name="materialRaisedButton4.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Start_cs_button.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAABGdBTUEAALGPC/xhBQAAAOBJREFUWEft
         1r0NwkAMBeCLKCipQayQEWAMGIMxyA6wAh0NM7ABEj09JYLj+ewOgS7R/RjJn/QklFxsK0Byzhhj/o33
@@ -140,7 +140,7 @@
         ejAeERWvDnq5rmRJWWj8DCMw2n7skKrbD3UbNF1bWGOMScq5N0F06sqEvOg8AAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="materialRaisedButton3.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Shortcut_button.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAABGdBTUEAALGPC/xhBQAAAUhJREFUWEft
         2DFOw0AQheFwAy5FwQko6LgGFIkoQOnhFOEMcAZ6+tBRU2DeeH5Fwbbkt2EtRZE/aSSz2TczigKKWMxO
@@ -151,7 +151,7 @@
         MsanUPyz4V5V852KXitGzE7BYvELBWFyJzyqe60AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="materialRaisedButton2.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Random_wallpaper.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAABGdBTUEAALGPC/xhBQAAAlZJREFUWEft
         ljtrVFEURicGiQgKeTQGiZAmmEaMgZjSQk0XrVL4C1IoKv4AGy3UwhSKIIKihY3B1mcl+IhIxNrCTsX4
@@ -167,7 +167,7 @@
         AAAASUVORK5CYII=
 </value>
   </data>
-  <data name="materialRaisedButton1.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Change_selected_wallpaper.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAABGdBTUEAALGPC/xhBQAAAjFJREFUWEft
         l7tqVFEUhqcNKPECiZCQi4hCqjRiOvEFIuQNRAnEInjDR/ABkiL2amdpKhUrn0CLkKQQFHyAREWLHL+1

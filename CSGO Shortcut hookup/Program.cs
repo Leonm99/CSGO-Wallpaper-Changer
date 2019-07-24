@@ -8,8 +8,8 @@
     {
         internal static void Main(string[] args)
         {
-            string currentVersion = @"1.2";
-            string saveFileVersion = @"1.2";
+            string currentVersion = @"1.3";
+            string saveFileVersion = @"1.3";
 
             int wallpaperAmount;
 
@@ -27,6 +27,8 @@
 
             string saveFile = "C:\\ProgramData\\Panorama Wallpaper Changer\\saveddata.txt";
 
+            string wallpaperToReplace;
+
             string[] wallpapers;
 
             using (StreamReader sr = File.OpenText(saveFile))
@@ -38,6 +40,7 @@
                 panoramaWallpaperPath = sr.ReadLine();
                 panoramaWallpaperStoragePath = sr.ReadLine();
                 activeWallpaper = sr.ReadLine();
+                wallpaperToReplace = sr.ReadLine();
             }
 
             wallpapers = Directory.GetFiles(panoramaWallpaperStoragePath, "*.webm");
@@ -76,7 +79,7 @@
                 if (System.IO.File.Exists(sirocco1))
                 {
                     //check if the needed file is there.
-                    System.IO.File.Copy(sirocco1, panoramaWallpaperPath + "\\sirocco.webm", true);
+                    System.IO.File.Copy(sirocco1, panoramaWallpaperPath + "\\" + wallpaperToReplace, true);
                 }
 
                 //Update activeWallpaper here and in save file

@@ -17,7 +17,7 @@
 
         public string activeWallpaper = @"no wallpaper"; //Wallpaper thats currently active.
         public string csgoInstallPath; //CS:GOs installation path.
-        public string currentVersion = @"1.2"; //Version.
+        public string currentVersion = @"1.3"; //Version.
         public string panoramaWallpaperPath; //Original wallpaper Path.
         public string panoramaWallpaperStoragePath = "Folder not selected..."; //Saved wallpaper path.
         public string saveFile = "C:\\ProgramData\\Panorama Wallpaper Changer\\saveddata.txt"; //Savefile path.
@@ -25,6 +25,7 @@
         public string steamInstallPath; //Steams installation path.
         public int wallpaperAmount; //Amount of present wallpapers.
         public string[] wallpapers; //Wallpaper array.
+        public string wallpaperToReplace = "no wallpaper selected!";
 
         internal Color darkbluegray = Color.FromArgb(38, 50, 56);
         internal string desktopPath; //Path to users desktop.
@@ -34,10 +35,14 @@
         internal string saveFileVersion; //Version of the savefile.
         internal string[] steamLibraries = new string[32]; //Active Steam Librarys.
         internal string thisdir; //Path from this program.
+
         //============================================================================================================-Variables-==========================================================================================================
-
-        //============================================================================================================-Important-Stuff-==========================================================================================================
-
+        //.
+        //.
+        //.
+        //============================================================================================================-Form-==========================================================================================================
+        //.
+        //Initialize form
         public Form1()
         {
             InitializeComponent();
@@ -55,204 +60,29 @@
             );
         }
 
-        public static void CreateShortcut(string shortcutName, string shortcutPath, string targetFileLocation, string thisdir)
+        //Load some stuff
+        private void Form1_Load(object sender, EventArgs e)
         {
-            //create a shortcut to the exe that i use to pick a random wallpaper then start csgo.
-            string shortcutLocation = System.IO.Path.Combine(shortcutPath, shortcutName + ".lnk");
-            WshShell shell = new WshShell();
-            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
+            //get desktop path
+            desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-            shortcut.Description = "Shortcut for CS:GO wallpaper changer.";   // The description of the shortcut
-            shortcut.IconLocation = thisdir + @"\files\icon.ico";           // The icon of the shortcut
-            shortcut.TargetPath = targetFileLocation;                 // The path of the file that will launch when the shortcut is run
-            shortcut.Save();                                    // Save the shortcut
-        }
+            //get path of this program
+            thisdir = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
-        public void ChooseWallpaper()
-        {
-            if (wallpapers != null)
-            {
-                while (true)
-                {
-                    //Get a random number within range of wallpapers
-                    Random r = new Random();
-                    int i = r.Next(0, wallpaperAmount);
+            //set wallpaper storage path to the home page
+            materialSingleLineTextField1.Text = "" + panoramaWallpaperStoragePath;
+            materialSingleLineTextField1.SelectAll();
+            materialSingleLineTextField1.Focus();
 
-                    selectedWallpaper = wallpapers[i];
+            richTextBox1.BackColor = Color.FromArgb(55, 71, 79);
+            button4.BackColor = Color.FromArgb(55, 71, 79);
+            materialListView1.HideSelection = true;
 
-                    //if wallpaper isnt active and has a sirocco.webm then set it as active
-                    if (selectedWallpaper != activeWallpaper && System.IO.File.Exists(selectedWallpaper))
-                    {
-                        SetWallpaper();
-                        break;
-                    }
-                    else
-                    {
-                        AddText(richTextBox1, "Selected wallpaper is already in use or cant be used!", lightred);
-                        break;
-                    }
-                }
-            }
-        }
-
-        public void ReadData()
-        {
-            //this should be obvious but if you cant read this reads the data from savefile.
-            using (StreamReader sr = System.IO.File.OpenText(saveFile))
-            {
-                saveFileVersion = sr.ReadLine();
-                wallpaperAmount = int.Parse(sr.ReadLine());
-                steamInstallPath = sr.ReadLine();
-                csgoInstallPath = sr.ReadLine();
-                panoramaWallpaperPath = sr.ReadLine();
-                panoramaWallpaperStoragePath = sr.ReadLine();
-                activeWallpaper = sr.ReadLine();
-            }
-        }
-
-        public void RunCS()
-        {
-            //uhh this one you should know.
-            AddText(richTextBox1, "Starting CS:GO", Color.Cyan);
-
-            ProcessStartInfo startInfo = new ProcessStartInfo(steamInstallPath + "\\Steam.exe");
-            startInfo.Arguments = "-applaunch 730";
-            Process.Start(startInfo);
-        }
-
-        public void Setup()
-        {
-            //if something isnt right setup is here to save our day!!!! :D
-            AddText(richTextBox1, "No save file was found. Proceeding with setup.", lightred);
-
-            //check if savefile directory exists if not create it.
-            if (!Directory.Exists("C:\\ProgramData\\Panorama Wallpaper Changer\\"))
-            {
-                Directory.CreateDirectory("C:\\ProgramData\\Panorama Wallpaper Changer\\");
-                AddText(richTextBox1, "Creating directory for saving data...", lightbluegray);
-            }
-
-            //check if savefile exists if not create it... who would have thought lol.
-            if (!System.IO.File.Exists("C:\\ProgramData\\Panorama Wallpaper Changer\\saveddata.txt"))
-            {
-                using (var myFile = System.IO.File.Create("C:\\ProgramData\\Panorama Wallpaper Changer\\saveddata.txt"))
-                {
-                }
-
-                AddText(richTextBox1, "Creating saveddata file...", lightbluegray);
-            }
-
-            //Find Steam install path in registry (thank you u/DontRushB)
-            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Valve\Steam"))
-            {
-                if (key != null)
-                {
-                    steamInstallPath = key.GetValue("InstallPath").ToString();
-                }
-                else
-                {
-                    using (RegistryKey key2 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Valve\Steam"))
-                    {
-                        if (key != null)
-                        {
-                            steamInstallPath = key.GetValue("InstallPath").ToString();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Steam Install Path was not found, please choose Steam path!");
-
-                            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-                            dialog.InitialDirectory = "C:\\Users";
-                            dialog.IsFolderPicker = true;
-                            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-                            {
-                                steamInstallPath = "" + dialog.FileName;
-                            }
-                        }
-                    }
-                }
-            }
-
-            //Look through Steam libraries until CSGO is found
-            if (System.IO.File.Exists(steamInstallPath + "\\steamapps\\common\\Counter-Strike Global Offensive\\csgo.exe"))
-            {
-                csgoInstallPath = steamInstallPath + "\\steamapps\\common\\Counter-Strike Global Offensive\\";
-            }
-            else
-            {
-                string[] fileInput = System.IO.File.ReadAllLines(steamInstallPath + @"\steamapps\libraryfolders.vdf");
-
-                for (int n = 0; n < (fileInput.Length); n++)
-                {
-                    steamLibraries[n] = fileInput[n];
-                }
-
-                for (int n = 0; n < steamLibraries.Length; n++)
-                {
-                    try
-                    {
-                        if (steamLibraries[n].Length > 4)
-                        {
-                            steamLibraries[n] = steamLibraries[n].Trim();
-                            steamLibraries[n] = steamLibraries[n].Remove(0, 3);
-                            steamLibraries[n] = steamLibraries[n].Trim();
-                            steamLibraries[n] = steamLibraries[n].Trim(new char[] { '"' });
-                            steamLibraries[n] = steamLibraries[n].Trim();
-                            if (steamLibraries[n].EndsWith("SteamLibrary"))
-                            {
-                                AddText(richTextBox1, "Steam Library found at " + "" + steamLibraries[n], lightgreen);
-                            }
-                            else
-                            {
-                                steamLibraries[n] = null;
-                            }
-                        }
-                    }
-                    catch (NullReferenceException) { }
-                }
-
-                for (int n = 0; n < steamLibraries.Length; n++)
-                {
-                    string csgoSearchPath = steamLibraries[n] + "\\steamapps\\common\\Counter-Strike Global Offensive\\";
-                    if (System.IO.File.Exists(csgoSearchPath + "csgo.exe"))
-                    {
-                        AddText(richTextBox1, "CSGO found!", lightgreen);
-
-                        csgoInstallPath = csgoSearchPath;
-                        break;
-                    }
-                }
-            }
-
-            panoramaWallpaperPath = csgoInstallPath + "csgo\\panorama\\videos\\";
-
-            //Write data to savefile
-            WriteData();
-            AddText(richTextBox1, "Setup complete.", lightgreen);
-            //run start again, hopefulle it works now lol.
+            //Call start method
             Start();
         }
 
-        public void SetWallpaper()
-        {
-            //Replace active wallpaper with new wallpaper
-            if (System.IO.File.Exists(selectedWallpaper))
-            {
-                //check if the needed file is there.
-                System.IO.File.Copy(selectedWallpaper, panoramaWallpaperPath + "\\sirocco.webm", true);
-            }
-            else
-            {
-                AddText(richTextBox1, "No .webm file found!", lightred);
-            }
-
-            //Update activeWallpaper here and in save file
-            activeWallpaper = selectedWallpaper;
-            WriteData();
-
-            AddText(richTextBox1, "Wallpaper set to " + activeWallpaper.Remove(0, panoramaWallpaperStoragePath.Length + 1), lightgreen);
-        }
-
+        //Get wallpapers and put them in the list view
         public void ShowWP()
         {
             //gets wallpapers and lists them
@@ -265,40 +95,271 @@
             }
         }
 
-        public void WriteData()
+        //Clear the textbox
+        private void Button4_Click_1(object sender, EventArgs e)
         {
-            //this should be obvious but if you cant read this writes the data to savefile.
-            using (StreamWriter sw = System.IO.File.CreateText(saveFile))
+            richTextBox1.Clear();
+        }
+
+        //============================================================================================================-Home-==========================================================================================================
+
+        //Change the selected wallpaper from the list
+        private void Change_selected_wallpaper_Click(object sender, EventArgs e)
+        {
+            try
             {
-                sw.WriteLine(currentVersion);
-                sw.WriteLine(wallpaperAmount);
-                sw.WriteLine(steamInstallPath);
-                sw.WriteLine(csgoInstallPath);
-                sw.WriteLine(panoramaWallpaperPath);
-                sw.WriteLine(panoramaWallpaperStoragePath);
-                sw.WriteLine(activeWallpaper);
+                //check if a wallpaper is clicked
+                if (materialListView1.SelectedItems != null)
+                {
+                    //change the selected wallpaper
+                    var sel = materialListView1.SelectedItems[0].Text;
+                    selectedWallpaper = panoramaWallpaperStoragePath + @"\" + sel;
+                    if (System.IO.File.Exists(selectedWallpaper))
+                    {
+                        SetWallpaper();
+                        materialSingleLineTextField3.Text = "" + sel;
+                    }
+                    else
+                    {
+                        //
+                        AddText(richTextBox1, "", lightred);
+                    }
+                }
+            }
+            catch
+            {
+                //if no item is selected show message
+                AddText(richTextBox1, "No item selected!", lightred);
             }
         }
 
-        internal void AddText(RichTextBox rtb, string txt, Color col)
+        //Select randomly a wallpaper and change it
+        private void Random_wallpaper_Click(object sender, EventArgs e)
         {
-            //this one sparks joy because it pushes text to the log.. and its even with COLOR :O
-            if (String.IsNullOrEmpty(richTextBox1.Text))
+            ChooseWallpaper();
+        }
+
+        //Creates the shortcut wich can be used to start CS:GO with a random wallpaper
+        private void Shortcut_button_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("This will create a shortcut for CSGO on your Desktop.\nif you use it it will randomly change the wallpaper and then start CSGO.", "Confirmation", MessageBoxButtons.YesNoCancel);
+            if (result == DialogResult.Yes)
             {
-                richTextBox1.SelectionColor = col;
-                richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Bold);
-                richTextBox1.AppendText(txt);
+                try
+                {
+                    //creates the shortcut
+                    CreateShortcut("CSGO Wallpaper", desktopPath, thisdir + @"\files\CSGO_start.exe", thisdir);
+                    AddText(richTextBox1, "Shortcut created successfully on desktop,", lightgreen);
+                    AddText(richTextBox1, "use this shortcut instead of CSGO’s for random wallpaper every launch.", lightgreen);
+                }
+                catch
+                {
+                    AddText(richTextBox1, "Error while creating shortcut!", lightred);
+                }
+            }
+        }
+
+        //Start CS:GO
+        private void Start_cs_button_Click(object sender, EventArgs e)
+        {
+            RunCS();
+        }
+
+        //Change the path in wich the wallpaper will be stored
+        private void Change_wallpaper_path_button_Click_1(object sender, EventArgs e)
+        {
+            //prompts the user to change path for Wallpapers
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = thisdir;
+            dialog.IsFolderPicker = true;
+            dialog.Multiselect = false;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                materialSingleLineTextField1.Text = "" + dialog.FileName;
+                panoramaWallpaperStoragePath = dialog.FileName;
+
+                if (Directory.Exists(panoramaWallpaperStoragePath) && Directory.GetFileSystemEntries(panoramaWallpaperStoragePath).Length != 0)
+                {
+                    activeWallpaper = "no wallpaper";
+
+                    wallpapers = Directory.GetFiles(dialog.FileName);
+                    wallpaperAmount = wallpapers.Length;
+
+                    WriteData();
+                    AddText(richTextBox1, "Changed wallpaper path" + " " + panoramaWallpaperStoragePath, lightbluegray);
+                    ShowWP();
+                }
+                else
+                {
+                    MessageBox.Show("The Folder you’ve choosen is empty!");
+                }
+            }
+        }
+
+        //Refreshes the list on click
+        private void Refresh_wallpaper_button_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(panoramaWallpaperStoragePath) && Directory.GetFileSystemEntries(panoramaWallpaperStoragePath).Length != 0)
+            {
+                try
+                {
+                    wallpapers = Directory.GetFiles(panoramaWallpaperStoragePath, "*.webm");
+
+                    ShowWP();
+
+                    if (wallpaperAmount != wallpapers.Length)
+                    {
+                        if (wallpapers.Length < wallpaperAmount)
+                        {
+                            AddText(richTextBox1, "Removed " + "" + (wallpaperAmount - wallpapers.Length) + " wallpapers.", lightbluegray);
+                        }
+                        else
+                        {
+                            AddText(richTextBox1, "Added " + "" + (wallpapers.Length - wallpaperAmount) + " wallpapers.", lightbluegray);
+                        }
+                        wallpaperAmount = wallpapers.Length;
+                        WriteData();
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    //If path is empty, go to setup
+                }
+            }
+        }
+
+        //============================================================================================================-Home-==========================================================================================================
+        //.
+        //.
+        //.
+        //============================================================================================================-Tools-==========================================================================================================
+
+        //Activates the text color mod (user has to put [ -language colortext ] into the launch options of CS:GO)
+        private void Add_textColorMod_button_Click(object sender, EventArgs e)
+        {
+            if (!System.IO.File.Exists(csgoInstallPath + "\\csgo\\resource\\csgo_colortext.txt"))
+            {
+                System.IO.File.WriteAllText(csgoInstallPath + "\\csgo\\resource\\csgo_colortext.txt", CSGO_Wallpaper_Changer.Properties.Resources.csgo_colortext);
+                MessageBox.Show("The mod will only work if you add [ -language colortext ] to your launch options, so please do that now for the effects wont show!", "Please add to launchoptions...");
+                AddText(richTextBox1, "Added Color Text Mod by BananaGaming", lightgreen);
             }
             else
             {
-                richTextBox1.SelectionColor = col;
-                richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Bold);
-                richTextBox1.AppendText(Environment.NewLine + txt);
+                MessageBox.Show("The file is already there, please add [ -language colortext ] to your CS:GO launchoptions!", "File already exists!");
             }
-
-            richTextBox1.ScrollToCaret();
         }
 
+        //Removes text color mod
+        private void Remove_textColorMod_button_Click(object sender, EventArgs e)
+        {
+            if (System.IO.File.Exists(csgoInstallPath + "\\csgo\\resource\\csgo_colortext.txt"))
+            {
+                System.IO.File.Delete(csgoInstallPath + "\\csgo\\resource\\csgo_colortext.txt");
+                AddText(richTextBox1, "Text color mod removed succesfully!", lightred);
+            }
+            else
+            {
+                MessageBox.Show("The mod is already removed! make sure you delete the part from it from the launch options.", "Already removed..");
+            }
+        }
+
+        //Change the CS:GO installation folder
+        private void Change_CSGOfolder_button_Click(object sender, EventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = @"c:\";
+            dialog.IsFolderPicker = true;
+            dialog.Multiselect = false;
+            dialog.Title = "Choose your Counter-Strike Global Offensive folder";
+
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                if (Directory.Exists(dialog.FileName + "\\csgo\\panorama\\videos\\"))
+                {
+                    materialSingleLineTextField2.Text = "" + dialog.FileName;
+                    csgoInstallPath = dialog.FileName;
+                    panoramaWallpaperPath = csgoInstallPath + "\\csgo\\panorama\\videos\\";
+
+                    WriteData();
+                    AddText(richTextBox1, "Changed CS:GO path" + " " + csgoInstallPath, lightbluegray);
+                }
+                else
+                {
+                    MessageBox.Show("The folder you have choosen is not the Counter-Strike Global Offensive folder!" +
+                                        "\n \n If you have installed CS:GO in the standard path it should be in:\n" +
+                                        @"C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\n" +
+                                        "If you have installed CS:GO in another directory please select it.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select the Counter-Strike Global Offensive folder!");
+            }
+        }
+
+        //Change the filename of the WEBM file that gets replaced with a custom wallpaper. this is just in case Valve changes the standard wallpaper for csgo.
+        private void Change_FileToReplace_button_Click(object sender, EventArgs e)
+        {
+            string val = "";
+            if (InputBox("CSGO wallpaper changer", "Please write down the filename and extension of the video file that csgo uses as Wallpaper:", ref val) == DialogResult.OK)
+            {
+                wallpaperToReplace = val;
+                materialSingleLineTextField4.Text = "" + wallpaperToReplace;
+                AddText(richTextBox1, "Changed file wich will be replaced!", lightgreen);
+                WriteData();
+            }
+        }
+
+        //This just puts stuff in textboxes because i couldnt get it to work normaly idk why but this works
+        private void MaterialTabSelector1_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(csgoInstallPath)) { materialSingleLineTextField2.Text = "" + csgoInstallPath; }
+            materialSingleLineTextField4.Text = "" + wallpaperToReplace;
+        }
+
+        //============================================================================================================-Tools-==========================================================================================================
+        //.
+        //.
+        //.
+        //============================================================================================================-About-==========================================================================================================
+
+        //Link to my Github :D
+        private void LinkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to open link that was clicked.");
+            }
+        }
+
+        //Link to the how to
+        private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //opens howto
+            try
+            {
+                System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer/wiki/How-to-use...");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to open link that was clicked.");
+            }
+        }
+
+        //============================================================================================================-About-==========================================================================================================
+        //.
+        //.
+        //============================================================================================================-Form-==========================================================================================================
+        //.
+        //.
+        //.
+        //.
+        //============================================================================================================-Methods and Functions-==========================================================================================================
+        //Start(); gets called at startup of the program.
         internal void Start()
         {
             //Clear list on startup.
@@ -420,264 +481,296 @@
             }
         }
 
-        //============================================================================================================-Important-Stuff-==========================================================================================================
-
-        //============================================================================================================-UI-Elements-==========================================================================================================
-
-        private void Button4_Click_1(object sender, EventArgs e)
+        //Setup(); will get called if its the first start or if something is wrong or missing.
+        public void Setup()
         {
-            richTextBox1.Clear();
-        }
+            //if something isnt right setup is here to save our day!!!! :D
+            AddText(richTextBox1, "No save file was found. Proceeding with setup.", lightred);
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // this one is the start of everything bro.. like the big bang or some shit
-
-            desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            thisdir = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-            materialSingleLineTextField1.Text = "" + panoramaWallpaperStoragePath;
-            materialSingleLineTextField1.SelectAll();
-            materialSingleLineTextField1.Focus();
-            richTextBox1.BackColor = Color.FromArgb(55, 71, 79);
-            button4.BackColor = Color.FromArgb(55, 71, 79);
-            materialListView1.HideSelection = true;
-
-            Start();
-        }
-
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            //launches explorer in the wallpaper path
-            if (Directory.Exists(panoramaWallpaperStoragePath))
+            //check if savefile directory exists if not create it.
+            if (!Directory.Exists("C:\\ProgramData\\Panorama Wallpaper Changer\\"))
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo
+                Directory.CreateDirectory("C:\\ProgramData\\Panorama Wallpaper Changer\\");
+                AddText(richTextBox1, "Creating directory for saving data...", lightbluegray);
+            }
+
+            //check if savefile exists if not create it... who would have thought lol.
+            if (!System.IO.File.Exists("C:\\ProgramData\\Panorama Wallpaper Changer\\saveddata.txt"))
+            {
+                using (var myFile = System.IO.File.Create("C:\\ProgramData\\Panorama Wallpaper Changer\\saveddata.txt"))
                 {
-                    Arguments = panoramaWallpaperStoragePath,
-                    FileName = "explorer.exe"
-                };
+                }
 
-                Process.Start(startInfo);
+                AddText(richTextBox1, "Creating saveddata file...", lightbluegray);
             }
-        }
 
-        private void LinkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            try
+            //Find Steam install path in registry (thank you u/DontRushB)
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Valve\Steam"))
             {
-                System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Unable to open link that was clicked.");
-            }
-        }
-
-        private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            //opens howto
-            try
-            {
-                System.Diagnostics.Process.Start("https://github.com/Leonm99/CSGO-Wallpaper-Changer/wiki/How-to-use...");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Unable to open link that was clicked.");
-            }
-        }
-
-        private void MaterialFlatButton1_Click_1(object sender, EventArgs e)
-        {
-            //prompts the user to change path for Wallpapers
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-            dialog.InitialDirectory = thisdir;
-            dialog.IsFolderPicker = true;
-            dialog.Multiselect = false;
-            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-            {
-                materialSingleLineTextField1.Text = "" + dialog.FileName;
-                panoramaWallpaperStoragePath = dialog.FileName;
-
-                if (Directory.Exists(panoramaWallpaperStoragePath) && Directory.GetFileSystemEntries(panoramaWallpaperStoragePath).Length != 0)
+                if (key != null)
                 {
-                    activeWallpaper = "no wallpaper";
-
-                    wallpapers = Directory.GetFiles(dialog.FileName);
-                    wallpaperAmount = wallpapers.Length;
-
-                    WriteData();
-                    AddText(richTextBox1, "Changed wallpaper path" + " " + panoramaWallpaperStoragePath, lightbluegray);
-                    ShowWP();
+                    steamInstallPath = key.GetValue("InstallPath").ToString();
                 }
                 else
                 {
-                    MessageBox.Show("The Folder you’ve choosen is empty!");
-                }
-            }
-        }
-
-        private void MaterialFlatButton2_Click(object sender, EventArgs e)
-        {
-            //prompts the user to change path for Wallpapers
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-            dialog.InitialDirectory = @"c:\";
-            dialog.IsFolderPicker = true;
-            dialog.Multiselect = false;
-            dialog.Title = "Choose your Counter-Strike Global Offensive folder";
-
-            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-            {
-                if (Directory.Exists(dialog.FileName + "\\csgo\\panorama\\videos\\"))
-                {
-                    materialSingleLineTextField2.Text = "" + dialog.FileName;
-                    csgoInstallPath = dialog.FileName;
-                    panoramaWallpaperPath = csgoInstallPath + "\\csgo\\panorama\\videos\\";
-
-                    WriteData();
-                    AddText(richTextBox1, "Changed CS:GO path" + " " + csgoInstallPath, lightbluegray);
-                }
-                else
-                {
-                    MessageBox.Show("The folder you have choosen is not the Counter-Strike Global Offensive folder!" +
-                                        "\n \n If you have installed CS:GO in the standard path it should be in:\n" +
-                                        @"C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\n" +
-                                        "If you have installed CS:GO in another directory please select it.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select the Counter-Strike Global Offensive folder!");
-            }
-        }
-
-        private void MaterialFlatButton3_Click(object sender, EventArgs e)
-        {
-            if (Directory.Exists(panoramaWallpaperStoragePath) && Directory.GetFileSystemEntries(panoramaWallpaperStoragePath).Length != 0)
-            {
-                try
-                {
-                    wallpapers = Directory.GetFiles(panoramaWallpaperStoragePath, "*.webm");
-
-                    ShowWP();
-
-                    if (wallpaperAmount != wallpapers.Length)
+                    using (RegistryKey key2 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Valve\Steam"))
                     {
-                        if (wallpapers.Length < wallpaperAmount)
+                        if (key != null)
                         {
-                            AddText(richTextBox1, "Removed " + "" + (wallpaperAmount - wallpapers.Length) + " wallpapers.", lightbluegray);
+                            steamInstallPath = key.GetValue("InstallPath").ToString();
                         }
                         else
                         {
-                            AddText(richTextBox1, "Added " + "" + (wallpapers.Length - wallpaperAmount) + " wallpapers.", lightbluegray);
+                            MessageBox.Show("Steam Install Path was not found, please choose Steam path!");
+
+                            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+                            dialog.InitialDirectory = "C:\\Users";
+                            dialog.IsFolderPicker = true;
+                            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                            {
+                                steamInstallPath = "" + dialog.FileName;
+                            }
                         }
-                        wallpaperAmount = wallpapers.Length;
-                        WriteData();
                     }
                 }
-                catch (ArgumentException)
+            }
+
+            //Look through Steam libraries until CSGO is found
+            if (System.IO.File.Exists(steamInstallPath + "\\steamapps\\common\\Counter-Strike Global Offensive\\csgo.exe"))
+            {
+                csgoInstallPath = steamInstallPath + "\\steamapps\\common\\Counter-Strike Global Offensive\\";
+            }
+            else
+            {
+                string[] fileInput = System.IO.File.ReadAllLines(steamInstallPath + @"\steamapps\libraryfolders.vdf");
+
+                for (int n = 0; n < (fileInput.Length); n++)
                 {
-                    //If path is empty, go to setup
+                    steamLibraries[n] = fileInput[n];
                 }
+
+                for (int n = 0; n < steamLibraries.Length; n++)
+                {
+                    try
+                    {
+                        if (steamLibraries[n].Length > 4)
+                        {
+                            steamLibraries[n] = steamLibraries[n].Trim();
+                            steamLibraries[n] = steamLibraries[n].Remove(0, 3);
+                            steamLibraries[n] = steamLibraries[n].Trim();
+                            steamLibraries[n] = steamLibraries[n].Trim(new char[] { '"' });
+                            steamLibraries[n] = steamLibraries[n].Trim();
+                            if (steamLibraries[n].EndsWith("SteamLibrary"))
+                            {
+                                AddText(richTextBox1, "Steam Library found at " + "" + steamLibraries[n], lightgreen);
+                            }
+                            else
+                            {
+                                steamLibraries[n] = null;
+                            }
+                        }
+                    }
+                    catch (NullReferenceException) { }
+                }
+
+                for (int n = 0; n < steamLibraries.Length; n++)
+                {
+                    string csgoSearchPath = steamLibraries[n] + "\\steamapps\\common\\Counter-Strike Global Offensive\\";
+                    if (System.IO.File.Exists(csgoSearchPath + "csgo.exe"))
+                    {
+                        AddText(richTextBox1, "CSGO found!", lightgreen);
+
+                        csgoInstallPath = csgoSearchPath;
+                        break;
+                    }
+                }
+            }
+
+            panoramaWallpaperPath = csgoInstallPath + "csgo\\panorama\\videos\\";
+            wallpaperToReplace = "sirocco.webm";
+            //Write data to savefile
+            WriteData();
+            AddText(richTextBox1, "Setup complete.", lightgreen);
+            //run start again, hopefulle it works now lol.
+            Start();
+        }
+
+        //Writes some directorys and some variables to the savefile
+        public void WriteData()
+        {
+            using (StreamWriter sw = System.IO.File.CreateText(saveFile))
+            {
+                sw.WriteLine(currentVersion);
+                sw.WriteLine(wallpaperAmount);
+                sw.WriteLine(steamInstallPath);
+                sw.WriteLine(csgoInstallPath);
+                sw.WriteLine(panoramaWallpaperPath);
+                sw.WriteLine(panoramaWallpaperStoragePath);
+                sw.WriteLine(activeWallpaper);
+                sw.WriteLine(wallpaperToReplace);
             }
         }
 
-        private void MaterialRaisedButton1_Click(object sender, EventArgs e)
+        //Reads the directorys and variables
+        public void ReadData()
         {
-            //check selected item from list
-            try
+            //this should be obvious but if you cant read this reads the data from savefile.
+            using (StreamReader sr = System.IO.File.OpenText(saveFile))
             {
-                if (materialListView1.SelectedItems != null)
+                saveFileVersion = sr.ReadLine();
+                wallpaperAmount = int.Parse(sr.ReadLine());
+                steamInstallPath = sr.ReadLine();
+                csgoInstallPath = sr.ReadLine();
+                panoramaWallpaperPath = sr.ReadLine();
+                panoramaWallpaperStoragePath = sr.ReadLine();
+                activeWallpaper = sr.ReadLine();
+                wallpaperToReplace = sr.ReadLine();
+            }
+        }
+
+        //Chooses a random wallpaper from all wallpapers
+        public void ChooseWallpaper()
+        {
+            if (wallpapers != null)
+            {
+                while (true)
                 {
-                    var sel = materialListView1.SelectedItems[0].Text;
-                    selectedWallpaper = panoramaWallpaperStoragePath + @"\" + sel;
-                    if (System.IO.File.Exists(selectedWallpaper))
+                    //Get a random number within range of wallpapers
+                    Random r = new Random();
+                    int i = r.Next(0, wallpaperAmount);
+
+                    selectedWallpaper = wallpapers[i];
+
+                    //if wallpaper isnt active set it as active
+                    if (selectedWallpaper != activeWallpaper && System.IO.File.Exists(selectedWallpaper))
                     {
                         SetWallpaper();
-                        materialSingleLineTextField3.Text = "" + sel;
+                        break;
                     }
                     else
                     {
-                        AddText(richTextBox1, "Selected item is not a Folder with a webm Wallpaper in it!", lightred);
+                        AddText(richTextBox1, "Selected wallpaper is already in use or cant be used!", lightred);
+                        break;
                     }
                 }
             }
-            catch
-            {
-                AddText(richTextBox1, "No item selected!", lightred);
-            }
         }
 
-        private void MaterialRaisedButton2_Click(object sender, EventArgs e)
+        //This copys the wallpaper that is choosen to the panorama\video folder in the CSGO installation folder and replaces the wallpaper that is currently in use
+        public void SetWallpaper()
         {
-            ChooseWallpaper();
-        }
-
-        private void MaterialRaisedButton3_Click(object sender, EventArgs e)
-        {
-            //creates the shortcut
-            DialogResult result = MessageBox.Show("This will create a shortcut for CSGO on your Desktop.\nif you use it it will randomly change the wallpaper and then start CSGO.", "Confirmation", MessageBoxButtons.YesNoCancel);
-            if (result == DialogResult.Yes)
+            //Replace active wallpaper with new wallpaper
+            if (System.IO.File.Exists(selectedWallpaper))
             {
-                try
+                //check if the needed file is there.
+                if (System.IO.File.Exists(panoramaWallpaperPath + "\\" + wallpaperToReplace))
                 {
-                    CreateShortcut("CSGO Wallpaper", desktopPath, thisdir + @"\files\CSGO_start.exe", thisdir);
-                    AddText(richTextBox1, "Shortcut created successfully on desktop,", lightgreen);
-                    AddText(richTextBox1, "use this shortcut instead of CSGO’s for random wallpaper every launch.", lightgreen);
+                    System.IO.File.Copy(selectedWallpaper, panoramaWallpaperPath + "\\" + wallpaperToReplace, true);
+                    //Update activeWallpaper here and in save file
+                    activeWallpaper = selectedWallpaper;
+                    WriteData();
+
+                    AddText(richTextBox1, "Wallpaper set to " + activeWallpaper.Remove(0, panoramaWallpaperStoragePath.Length + 1), lightgreen);
                 }
-                catch
+                else
                 {
-                    AddText(richTextBox1, "Error while creating shortcut!", lightred);
+                    AddText(richTextBox1, "Please pick in the tools section a valid filename of a webm file wich is used by CS:GO!", lightred);
                 }
             }
-            else if (result == DialogResult.No)
+            else
             {
+                AddText(richTextBox1, "No .webm file found!", lightred);
+            }
+        }
+
+        //Creates the shortcut
+        public static void CreateShortcut(string shortcutName, string shortcutPath, string targetFileLocation, string thisdir)
+        {
+            //create a shortcut to the exe that i use to pick a random wallpaper then start csgo.
+            string shortcutLocation = System.IO.Path.Combine(shortcutPath, shortcutName + ".lnk");
+            WshShell shell = new WshShell();
+            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
+
+            shortcut.Description = "Shortcut for CS:GO wallpaper changer.";   // The description of the shortcut
+            shortcut.IconLocation = thisdir + @"\files\icon.ico";           // The icon of the shortcut
+            shortcut.TargetPath = targetFileLocation;                 // The path of the file that will launch when the shortcut is run
+            shortcut.Save();                                    // Save the shortcut
+        }
+
+        //Starts CS:GO
+        public void RunCS()
+        {
+            //uhh this one you should know.
+            AddText(richTextBox1, "Starting CS:GO", Color.Cyan);
+
+            ProcessStartInfo startInfo = new ProcessStartInfo(steamInstallPath + "\\Steam.exe");
+            startInfo.Arguments = "-applaunch 730";
+            Process.Start(startInfo);
+        }
+
+        //Adds text to the "console" in the program
+        internal void AddText(RichTextBox rtb, string txt, Color col)
+        {
+            //this one sparks joy because it pushes text to the log.. and its even with COLOR :O
+            if (String.IsNullOrEmpty(richTextBox1.Text))
+            {
+                richTextBox1.SelectionColor = col;
+                richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Bold);
+                richTextBox1.AppendText(txt);
             }
             else
             {
+                richTextBox1.SelectionColor = col;
+                richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Bold);
+                richTextBox1.AppendText(Environment.NewLine + txt);
             }
+
+            richTextBox1.ScrollToCaret();
         }
 
-        private void MaterialRaisedButton4_Click(object sender, EventArgs e)
+        //this is used for a dialog box
+        public static DialogResult InputBox(string title, string promptText, ref string val)
         {
-            RunCS();
+            Form form = new Form();
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button buttonOk = new Button();
+            Button buttonCancel = new Button();
+
+            form.Text = title;
+            label.Text = promptText;
+            textBox.Text = val;
+
+            buttonOk.Text = "OK";
+            buttonCancel.Text = "Cancel";
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+
+            label.SetBounds(9, 20, 372, 13);
+            textBox.SetBounds(12, 36, 372, 20);
+            buttonOk.SetBounds(228, 72, 75, 23);
+            buttonCancel.SetBounds(309, 72, 75, 23);
+
+            label.AutoSize = true;
+            textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+            form.ClientSize = new Size(396, 107);
+            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+
+            DialogResult dialogResult = form.ShowDialog();
+            val = textBox.Text;
+            return dialogResult;
         }
 
-        private void MaterialRaisedButton5_Click(object sender, EventArgs e)
-        {
-            if (!System.IO.File.Exists(csgoInstallPath + "\\csgo\\resource\\csgo_colortext.txt"))
-            {
-                System.IO.File.WriteAllText(csgoInstallPath + "\\csgo\\resource\\csgo_colortext.txt", CSGO_Wallpaper_Changer.Properties.Resources.csgo_colortext);
-                MessageBox.Show("The mod will only work if you add [ -language colortext ] to your launch options, so please do that now for the effects wont show!", "Please add to launchoptions...");
-                AddText(richTextBox1, "Added Color Text Mod by BananaGaming", lightgreen);
-            }
-            else
-            {
-                MessageBox.Show("The file is already there, please add [ -language colortext ] to your CS:GO launchoptions!", "File already exists!");
-            }
-        }
-
-        private void MaterialRaisedButton6_Click(object sender, EventArgs e)
-        {
-            if (System.IO.File.Exists(csgoInstallPath + "\\csgo\\resource\\csgo_colortext.txt"))
-            {
-                System.IO.File.Delete(csgoInstallPath + "\\csgo\\resource\\csgo_colortext.txt");
-                AddText(richTextBox1, "Text color mod removed succesfully!", lightred);
-            }
-            else
-            {
-                MessageBox.Show("The mod is already removed! make sure you delete the part from it from the launch options.", "Already removed..");
-            }
-        }
-
-        private void MaterialTabSelector1_Click(object sender, EventArgs e)
-        {
-            if (Directory.Exists(csgoInstallPath)) { materialSingleLineTextField2.Text = "" + csgoInstallPath; }
-        }
-
-        private void RichTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            //much emptiness is present here but thats not your buisiness
-        }
+        //============================================================================================================-Methods and Functions-==========================================================================================================
     }
 }
-
-//============================================================================================================-UI-Elements-==========================================================================================================
