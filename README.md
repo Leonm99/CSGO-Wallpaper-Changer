@@ -16,7 +16,7 @@ CS:GO Wallpaper Changer is a small and easy tool to replace the background in th
   - [x] Wallpaper can even be changed when in game through the program! 
   - [x] Accept WEBM file as wallpaper without extra folders.
   - [x] Material design.
-  - [x] Color text mod by BananaGaming.
+  - [x] Color text mod by BananaGaming. Will be updated to newest version!
 
 # Features I want to add.
 
