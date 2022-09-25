@@ -1,3 +1,7 @@
+# DISCONTINUED, MIGHT VISIT THIS ANOTHER TIME
+
+
+
 # CS:GO Wallpaper Changer
 ## [Download from GoogleDrive](https://drive.google.com/drive/folders/1AubwGRbimU5wEv9_2x8hUB1M4KwH0WqF?usp=sharing)  
 
